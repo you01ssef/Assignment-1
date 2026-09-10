@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cybersecurity | Youssef - IT Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <div class="logo-avatar">Y</div>
+        <div class="logo-text-group">
+          <div class="logo-text">Youssef</div>
+          <div class="logo-sub">Kean University &bull; Senior</div>
+        </div>
+      </a>
+      <button class="mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Me</a></li>
+          <li><a href="tech-interests.html" class="nav-link">Tech Interests</a></li>
+          <li><a href="cybersecurity.html" class="nav-link active">Cybersecurity</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="page-badge">Page 4 &bull; Course Connection</div>
+      <h1 class="page-title">My Cybersecurity Awareness</h1>
+      <p class="page-subtitle">
+        Connecting course concepts to real-world IT: definitions, asset protection, active 2FA habits, and incident alert triaging.
+      </p>
+    </div>
+
+    <div class="qa-stack">
+
+      <div class="qa-item">
+        <div class="qa-header-row">
+          <span class="qa-badge">QUESTION 1</span>
+        </div>
+        <h3 class="qa-prompt">What does cybersecurity mean to you?</h3>
+        <p class="qa-response">
+          To me, cybersecurity means <strong>the protection of individuals along with important and sensitive information</strong>. 
+          It ensures that everyday users and organizations can operate securely without fearing that private data, personal identities, or critical communications will be intercepted, altered, or stolen by unauthorized parties.
+        </p>
+        <div class="qa-callout">
+          <strong>Key Definition:</strong> Safeguarding people, digital identities, and sensitive records against unauthorized access.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-header-row">
+          <span class="qa-badge">QUESTION 2</span>
+        </div>
+        <h3 class="qa-prompt">Why is cybersecurity important?</h3>
+        <p class="qa-response">
+          Cybersecurity is important <strong>to protect assets, information, business secrets, and confidential paperwork</strong>. 
+          In today's digital environment, intellectual property, corporate finances, and sensitive documents are stored on networks. Without strong security measures, organizations risk severe financial loss, stolen trade secrets, and compromised confidential records.
+        </p>
+        <div class="qa-callout">
+          <strong>Why It Matters:</strong> Preserving business continuity, protecting trade secrets, and preventing confidential data breaches.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-header-row">
+          <span class="qa-badge">QUESTION 3</span>
+        </div>
+        <h3 class="qa-prompt">What is one cybersecurity habit you currently practice?</h3>
+        <p class="qa-response">
+          One cybersecurity habit I actively practice is using <strong>Two-Factor Authentication (2FA)</strong> across all my important personal, academic, and financial accounts. 
+          Even if a password is breached in a database leak, 2FA prevents attackers from accessing the account without physical possession of the secondary verification token.
+        </p>
+        
+        <div class="widget-box">
+          <div class="widget-title">
+            <span>&#128273;</span> Interactive 2FA Demo Widget
+          </div>
+          <p class="widget-desc">
+            Simulate how a 6-digit Time-Based One-Time Password (TOTP) authenticator stops unauthorized logins:
+          </p>
+          <div style="display: flex; gap: 0.85rem; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap;">
+            <button id="generate-2fa-btn" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.84rem;">Generate Token</button>
+            <div style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: #64748b; letter-spacing: 0.15em;" id="current-otp-display">
+              ------
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
+            <input type="text" id="otp-user-input" class="form-control" placeholder="Enter 6-digit code..." maxlength="6">
+            <button id="verify-2fa-btn" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.84rem;">Verify Code</button>
+          </div>
+          <div id="otp-result-msg" style="margin-top: 0.75rem; font-size: 0.88rem; font-weight: 600;"></div>
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-header-row">
+          <span class="qa-badge">QUESTION 4</span>
+        </div>
+        <h3 class="qa-prompt">What cybersecurity topic do you want to learn this semester?</h3>
+        <p class="qa-response">
+          While my primary career focus is general IT infrastructure rather than cybersecurity specialization, the specific topic I would like to learn about this semester is <strong>security alert and incident triaging</strong>. 
+          In IT support, administrators receive numerous alerts and notifications daily. Learning how to triage—quickly evaluating an alert, determining its severity, filtering noise, and knowing how to prioritize urgent threats—is an essential practical skill for any IT administrator.
+        </p>
+        <div class="qa-callout">
+          <strong>Learning Goal:</strong> Incident triaging, alert prioritization, and efficient threat escalation workflows.
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-text"><strong>Youssef</strong> &bull; Information Technology Senior</div>
+        <div class="footer-sub">Kean University &bull; Assignment 1</div>
+      </div>
+      <div class="footer-nav">
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="about.html" class="footer-link">About Me</a>
+        <a href="tech-interests.html" class="footer-link">Tech Interests</a>
+        <a href="cybersecurity.html" class="footer-link">Cybersecurity</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
