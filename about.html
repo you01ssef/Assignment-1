@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Me | Youssef - IT Portfolio</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/chatbot.css">
 </head>
 <body>
 
-  <!-- Navigation -->
   <header>
     <div class="nav-container">
       <a href="index.html" class="logo-link">
@@ -31,7 +29,6 @@
     </div>
   </header>
 
-  <!-- Main Content -->
   <main>
     <div class="page-header">
       <div class="page-badge">Page 2 &bull; Personal Profile</div>
@@ -41,7 +38,6 @@
       </p>
     </div>
 
-    <!-- Compact Highlights Grid (Concise for Verbal Presentation) -->
     <div class="compact-grid">
       <div class="compact-card">
         <div class="compact-header">
@@ -95,7 +91,6 @@
     </div>
   </main>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-brand">
@@ -111,7 +106,48 @@
     </div>
   </footer>
 
+  <!-- AI Assistant Chatbot Widget -->
+  <button id="ai-chat-launcher" class="ai-chat-launcher" aria-label="Open AI Portfolio Assistant">
+    <span class="ai-chat-launcher-icon">🤖</span>
+    <span>Ask AI</span>
+    <span class="ai-chat-launcher-pulse"></span>
+  </button>
+
+  <div id="ai-chat-window" class="ai-chat-window">
+    <div class="ai-chat-header">
+      <div class="ai-chat-header-info">
+        <div class="ai-chat-header-avatar">Y</div>
+        <div>
+          <div class="ai-chat-header-title">Youssef's AI Assistant</div>
+          <div class="ai-chat-header-status">Online &bull; Kean IT Assistant</div>
+        </div>
+      </div>
+      <div class="ai-chat-header-actions">
+        <button class="ai-chat-action-btn" id="ai-chat-reset-btn" title="Reset chat">🔄</button>
+        <button class="ai-chat-action-btn" id="ai-chat-close-btn" title="Close chat">✕</button>
+      </div>
+    </div>
+
+    <div class="ai-chat-suggestions">
+      <button class="ai-chat-chip" data-q="Who is Youssef?">Who is Youssef?</button>
+      <button class="ai-chat-chip" data-q="What are his hobbies?">Hobbies &amp; Guitar</button>
+      <button class="ai-chat-chip" data-q="What tech career interests him?">Career Interest</button>
+      <button class="ai-chat-chip" data-q="What is his cybersecurity habit?">2FA Habit</button>
+      <button class="ai-chat-chip" data-q="What languages does he speak?">Languages</button>
+    </div>
+
+    <div class="ai-chat-messages" id="ai-chat-messages-container">
+      <div class="ai-chat-msg ai-chat-msg-bot">
+        👋 Hi there! I'm Youssef's AI Assistant. Ask me anything about his IT degree at <strong>Kean University</strong>, his hobbies (like 6 years playing guitar), his daily tech tools, or his cybersecurity habits!
+      </div>
+    </div>
+
+    <div class="ai-chat-input-area">
+      <input type="text" class="ai-chat-input" id="ai-chat-user-input" placeholder="Ask a question about Youssef..." autocomplete="off">
+      <button class="ai-chat-send-btn" id="ai-chat-send-btn" aria-label="Send message">&#10148;</button>
+    </div>
+  </div>
+
   <script src="js/main.js"></script>
-  <script src="js/chatbot.js"></script>
 </body>
 </html>
