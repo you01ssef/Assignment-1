@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Threat Model | Youssef - IT Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <div class="logo-avatar">Y</div>
+        <div class="logo-text-group">
+          <div class="logo-text">Youssef</div>
+          <div class="logo-sub">Kean University &bull; Senior</div>
+        </div>
+      </a>
+      <button class="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Me</a></li>
+          <li><a href="tech-interests.html" class="nav-link">Tech Interests</a></li>
+          <li><a href="cybersecurity.html" class="nav-link">Cybersecurity</a></li>
+          <li><a href="threat-model.html" class="nav-link active" aria-current="page">Threat Model</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="tm-main">
+    <div class="page-header">
+      <div class="page-badge">Assignment 2 &bull; Threat Modeling</div>
+      <h1 class="page-title">My Website <span class="gradient-text">Threat Model</span></h1>
+      <p class="page-subtitle">What could go wrong with my portfolio, what needs protecting, and how I would reduce the risks using STRIDE.</p>
+      <div class="tm-jump-links"><a href="#architecture">Site architecture</a><a href="#stride">Explore STRIDE</a><a href="#protections">Protection plan</a></div>
+    </div>
+    <section class="tm-section" aria-labelledby="scope-title">
+      <h2 id="scope-title" class="section-title">What am I protecting?</h2>
+      <div class="compact-grid tm-assets">
+        <div class="compact-card"><h3 class="compact-title">Content integrity</h3><p class="compact-text">Keep my portfolio accurate and prevent unauthorized changes.</p></div>
+        <div class="compact-card"><h3 class="compact-title">Account &amp; privacy</h3><p class="compact-text">Protect my GitHub publishing access and avoid exposing sensitive information.</p></div>
+        <div class="compact-card"><h3 class="compact-title">Availability</h3><p class="compact-text">Keep the website and its interactive features usable for visitors.</p></div>
+      </div>
+    </section>
+    <section id="architecture" class="tm-section" aria-labelledby="architecture-title">
+      <h2 id="architecture-title" class="section-title">How this website works</h2>
+      <div class="qa-item">
+        <div class="tm-flow" role="img" aria-label="A visitor uses a web browser. The browser requests website files from GitHub Pages over HTTPS and runs the chatbot and 2FA demo locally.">
+          <div class="tm-flow-node"><span class="tm-node-label">01 / VISITOR</span><strong>User</strong><span>Views pages &amp; asks questions</span></div>
+          <span class="tm-flow-arrow" aria-hidden="true">&rarr;</span>
+          <div class="tm-flow-node"><span class="tm-node-label">02 / CLIENT</span><strong>Web browser</strong><span>Runs the JavaScript application</span></div>
+          <span class="tm-flow-arrow" aria-hidden="true">&harr;</span>
+          <div class="tm-flow-node"><span class="tm-node-label">03 / HOST</span><strong>GitHub Pages</strong><span>Serves website files over HTTPS</span></div>
+        </div>
+        <p class="tm-publish-flow"><strong>Publishing:</strong> Website owner &rarr; GitHub sign-in &rarr; repository &rarr; GitHub Pages.</p>
+        <div class="qa-callout"><strong>Current scope:</strong> This is a static website. The chatbot uses predefined answers in the browser. There is no database, visitor login, or external AI API in the reviewed code. The browser also requests fonts from Google Fonts.</div>
+        <p class="tm-boundaries"><strong>Trust boundaries:</strong> visitor input enters the page; files travel from the host to the browser; GitHub permissions control publishing; font requests reach a third party. Public viewing is allowed, but publishing changes requires authorization.</p>
+      </div>
+    </section>
+    <section id="stride" class="tm-section" aria-labelledby="stride-title">
+      <h2 id="stride-title" class="section-title">Six ways to think about threats</h2>
+      <p class="tm-intro">STRIDE groups threats into six categories. These are potential scenarios and suggested priorities, not claims that an attack has happened or that the listed controls are already enabled.</p>
+      <div class="tm-grid">
+        <article class="compact-card tm-card">
+          <div class="tm-card-top"><span class="tm-letter" aria-hidden="true">S</span><span class="tm-priority tm-priority-high">High priority</span></div>
+          <h3>Spoofing</h3><p class="tm-topic">Authentication & credential attacks</p>
+          <p>Someone uses a phished password or stolen GitHub session to impersonate me and publish a fake portfolio.</p>
+          <div class="tm-control"><strong>How I would reduce the risk</strong><p>Use a passkey or strong MFA, unique credentials, and review active sessions.</p></div>
+        </article>
+        <article class="compact-card tm-card">
+          <div class="tm-card-top"><span class="tm-letter" aria-hidden="true">T</span><span class="tm-priority tm-priority-high">High priority</span></div>
+          <h3>Tampering</h3><p class="tm-topic">Unauthorized changes</p>
+          <p>Someone with stolen or excessive repository access alters the website or inserts malicious links.</p>
+          <div class="tm-control"><strong>How I would reduce the risk</strong><p>Restrict write access, review changes before publishing, and keep a known-good version.</p></div>
+        </article>
+        <article class="compact-card tm-card">
+          <div class="tm-card-top"><span class="tm-letter" aria-hidden="true">R</span><span class="tm-priority tm-priority-medium">Medium priority</span></div>
+          <h3>Repudiation</h3><p class="tm-topic">Denying an action</p>
+          <p>A contributor denies making an unwanted change, making investigation harder, especially with shared accounts.</p>
+          <div class="tm-control"><strong>How I would reduce the risk</strong><p>Use individual accounts and retain commit and deployment history. Commit metadata alone does not prove who controlled an account.</p></div>
+        </article>
+        <article class="compact-card tm-card">
+          <div class="tm-card-top"><span class="tm-letter" aria-hidden="true">I</span><span class="tm-priority tm-priority-high">High priority</span></div>
+          <h3>Information Disclosure</h3><p class="tm-topic">Data leakage & XSS</p>
+          <p>Private information or credentials could be exposed in public files. The chatbot also inserts visitor messages as HTML, creating an injection risk in that visitor’s page.</p>
+          <div class="tm-control"><strong>How I would reduce the risk</strong><p>Keep secrets out of public files and display visitor messages as plain text. A cross-user chat exploit has not been demonstrated.</p></div>
+        </article>
+        <article class="compact-card tm-card">
+          <div class="tm-card-top"><span class="tm-letter" aria-hidden="true">D</span><span class="tm-priority tm-priority-medium">Medium priority</span></div>
+          <h3>Denial of Service</h3><p class="tm-topic">Loss of availability</p>
+          <p>Heavy traffic could disrupt hosting. Separately, very large or repeated chat messages could slow a visitor’s browser.</p>
+          <div class="tm-control"><strong>How I would reduce the risk</strong><p>Monitor availability and use host protections. Cap chat message length and history; browser limits do not protect the hosting service.</p></div>
+        </article>
+        <article class="compact-card tm-card">
+          <div class="tm-card-top"><span class="tm-letter" aria-hidden="true">E</span><span class="tm-priority tm-priority-high">High priority</span></div>
+          <h3>Elevation of Privilege</h3><p class="tm-topic">Authorization & unauthorized access</p>
+          <p>An overly broad collaborator role or deployment token gives someone more publishing access than they need.</p>
+          <div class="tm-control"><strong>How I would reduce the risk</strong><p>Apply least privilege, remove unused access, and restrict deployment-token permissions.</p></div>
+        </article>
+      </div>
+    </section>
+    <section class="tm-section" aria-labelledby="notes-title">
+      <h2 id="notes-title" class="section-title">Two important scope notes</h2>
+      <div class="tm-notes">
+        <article class="qa-item"><span class="qa-badge">SQL INJECTION</span><h3 class="qa-prompt">No database, no SQL queries</h3><p class="qa-response">SQL injection does not apply to this version because it does not use a database. If I later store accounts or messages, I would use parameterized queries and restrict database permissions.</p></article>
+        <article class="qa-item"><span class="qa-badge">AUTHENTICATION</span><h3 class="qa-prompt">The 2FA widget is a demo</h3><p class="qa-response">The widget generates and checks a number inside the browser. It does not implement real time-based authentication or protect private resources. Any future login and access checks must be enforced on a server.</p></article>
+      </div>
+    </section>
+    <section id="protections" class="tm-section" aria-labelledby="protections-title">
+      <h2 id="protections-title" class="section-title">My protection plan</h2>
+      <div class="qa-item">
+        <ol class="tm-plan">
+          <li><strong>Handle chat input safely.</strong> Render visitor messages with <code>textContent</code> instead of <code>innerHTML</code>, then verify that HTML-like text stays literal.</li>
+          <li><strong>Secure publishing access.</strong> Review GitHub MFA, collaborators, sessions, and token permissions. Keep credentials out of website files and repository history.</li>
+          <li><strong>Keep the site usable and recoverable.</strong> Limit chat input and message history, retain a known-good version, and check deployment records after unexpected changes.</li>
+        </ol>
+        <p class="tm-review-note">Assessment based on the portfolio source. Account settings have not been audited, and these improvements are a plan. I will revisit the model if I add accounts, a database, or an AI service.</p>
+      </div>
+    </section>
+    <details class="tm-sources">
+      <summary>Sources &amp; further reading</summary>
+      <ul>
+        <li><a href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats">Microsoft &mdash; STRIDE threat categories</a></li>
+        <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html">OWASP &mdash; DOM-based XSS prevention</a></li>
+        <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">OWASP &mdash; SQL injection prevention</a></li>
+        <li><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">GitHub &mdash; GitHub Pages hosting</a></li>
+      </ul>
+    </details>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="footer-text"><strong>Youssef</strong> &bull; Information Technology Senior</div>
+        <div class="footer-sub">Kean University &bull; Assignment 2</div>
+      </div>
+      <div class="footer-nav">
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="about.html" class="footer-link">About Me</a>
+        <a href="tech-interests.html" class="footer-link">Tech Interests</a>
+        <a href="cybersecurity.html" class="footer-link">Cybersecurity</a>
+        <a href="threat-model.html" class="footer-link">Threat Model</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AI Assistant Chatbot Widget -->
+  <button id="ai-chat-launcher" class="ai-chat-launcher" aria-label="Open AI Portfolio Assistant">
+    <span class="ai-chat-launcher-icon">🤖</span>
+    <span>Ask AI</span>
+    <span class="ai-chat-launcher-pulse"></span>
+  </button>
+
+  <div id="ai-chat-window" class="ai-chat-window">
+    <div class="ai-chat-header">
+      <div class="ai-chat-header-info">
+        <div class="ai-chat-header-avatar">Y</div>
+        <div>
+          <div class="ai-chat-header-title">Youssef's AI Assistant</div>
+          <div class="ai-chat-header-status">Online &bull; Kean IT Assistant</div>
+        </div>
+      </div>
+      <div class="ai-chat-header-actions">
+        <button class="ai-chat-action-btn" id="ai-chat-reset-btn" title="Reset chat">🔄</button>
+        <button class="ai-chat-action-btn" id="ai-chat-close-btn" title="Close chat">✕</button>
+      </div>
+    </div>
+
+    <div class="ai-chat-suggestions">
+      <button class="ai-chat-chip" data-q="Who is Youssef?">Who is Youssef?</button>
+      <button class="ai-chat-chip" data-q="What are his hobbies?">Hobbies &amp; Guitar</button>
+      <button class="ai-chat-chip" data-q="What tech career interests him?">Career Interest</button>
+      <button class="ai-chat-chip" data-q="What is his cybersecurity habit?">2FA Habit</button>
+      <button class="ai-chat-chip" data-q="What languages does he speak?">Languages</button>
+    </div>
+
+    <div class="ai-chat-messages" id="ai-chat-messages-container">
+      <div class="ai-chat-msg ai-chat-msg-bot">
+        👋 Hi there! I'm Youssef's AI Assistant. Ask me anything about his IT degree at <strong>Kean University</strong>, his hobbies (like 6 years playing guitar), his daily tech tools, or his cybersecurity habits!
+      </div>
+    </div>
+
+    <div class="ai-chat-input-area">
+      <input type="text" class="ai-chat-input" id="ai-chat-user-input" placeholder="Ask a question about Youssef..." autocomplete="off">
+      <button class="ai-chat-send-btn" id="ai-chat-send-btn" aria-label="Send message">&#10148;</button>
+    </div>
+  </div>
+
+<script src="css/js/main.js"></script>
+
+</body>
+</html>
