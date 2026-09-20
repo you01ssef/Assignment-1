@@ -65,6 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
 function initAIChatbot() {
   const KNOWLEDGE_BASE = [
     {
+      id: "threat_model",
+      keywords: ["threat model", "threat modeling", "stride", "assignment 2"],
+      response: "Youssef's <a href='threat-model.html'>Website Threat Model</a> uses <strong>STRIDE</strong>: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, and Elevation of Privilege. It covers the portfolio's architecture, potential risks, and a simple protection plan. The current site has no database or visitor login."
+    },
+    {
       id: "bio",
       keywords: ["who is youssef", "who are you", "tell me about yourself", "bio", "about youssef", "introduce", "introduction", "student"],
       response: "<strong>Youssef</strong> is a senior at <strong>Kean University</strong> majoring in <strong>Information Technology</strong>. His primary focus right now is to finish strong and graduate as soon as possible! Outside classes, he loves music, playing guitar for over 6 years, solo traveling, and digital photography."
@@ -142,7 +147,7 @@ function initAIChatbot() {
     {
       id: "pages",
       keywords: ["pages", "sections", "navigation", "website", "where can i find", "links", "menu"],
-      response: "This website has 4 main sections:<br>• <a href='index.html'>Home</a>: Bio & Highlights<br>• <a href='about.html'>About Me</a>: Hobbies & Languages<br>• <a href='tech-interests.html'>Tech Interests</a>: Daily Tools & Career Goals<br>• <a href='cybersecurity.html'>Cybersecurity</a>: Course Reflection & 2FA Demo"
+      response: "This website has 5 main sections:<br>• <a href='index.html'>Home</a>: Bio & Highlights<br>• <a href='about.html'>About Me</a>: Hobbies & Languages<br>• <a href='tech-interests.html'>Tech Interests</a>: Daily Tools & Career Goals<br>• <a href='cybersecurity.html'>Cybersecurity</a>: Course Reflection & 2FA Demo<br>• <a href='threat-model.html'>Threat Model</a>: STRIDE Risks & Protection Plan"
     },
     {
       id: "greetings",
