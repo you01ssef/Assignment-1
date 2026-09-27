@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Youssef’s IT portfolio: technology, cybersecurity, and a practical security lab."
+    />
+    <title>Security lab · Youssef</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="css/js/main.js" defer></script>
+    <script type="module" src="css/js/chatbot.js"></script>
+    <script src="css/js/lab.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="nav-container">
+        <a class="brand" href="index.html" aria-label="Youssef home"
+          ><span class="monogram">y.</span
+          ><span
+            >Youssef<span class="brand-sub"
+              >IT STUDENT &amp; BUILDER</span
+            ></span
+          ></a
+        ><button
+          class="mobile-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="navigation"
+        >
+          Menu ☰
+        </button>
+        <nav id="navigation" aria-label="Main navigation">
+          <a href="index.html">Home</a><a href="about.html">About</a
+          ><a href="tech-interests.html">Technology</a
+          ><a href="cybersecurity.html">Cybersecurity</a
+          ><a href="threat-model.html">Threat model</a
+          ><a href="architecture.html">Architecture</a
+          ><a class="nav-lab" href="security-lab.html" aria-current="page"
+            >Security lab <span aria-hidden="true">↗</span></a
+          >
+        </nav>
+      </div>
+    </header>
+    <main id="main-content">
+      <div class="page-header">
+        <div class="eyebrow">A PRACTICAL SECURITY DEMO</div>
+        <h1 class="page-title">
+          Your own little<br /><em>security notebook.</em>
+        </h1>
+        <p class="page-subtitle">
+          Save what you’re learning in a private notebook. Simple on the
+          surface, with real access checks behind it.
+        </p>
+      </div>
+      <div id="lab-status" class="notice" role="status">
+        Connecting to the security lab…
+      </div>
+      <section class="lab-grid">
+        <div class="panel lab-workspace">
+          <div id="auth-area" hidden>
+            <div class="form-tabs">
+              <button
+                id="login-tab"
+                class="selected"
+                type="button"
+                aria-pressed="true"
+              >
+                Sign in</button
+              ><button id="register-tab" type="button" aria-pressed="false">
+                Create account
+              </button>
+            </div>
+            <h2 id="auth-title">Welcome back.</h2>
+            <p class="muted" id="auth-description">
+              Sign in to open your private notes.
+            </p>
+            <form id="auth-form">
+              <label for="username">Username</label
+              ><input
+                id="username"
+                name="username"
+                autocomplete="username"
+                required
+                minlength="3"
+                maxlength="24"
+                pattern="[A-Za-z0-9_]{3,24}"
+                aria-describedby="username-help"
+              /><small id="username-help"
+                >3–24 letters, numbers, or underscores.</small
+              ><label for="password">Password</label
+              ><input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                required
+                minlength="12"
+                maxlength="128"
+                aria-describedby="password-help"
+              /><small id="password-help"
+                >12–128 characters. A memorable passphrase works well.</small
+              ><button class="btn primary full" id="auth-submit">
+                Sign in →
+              </button>
+              <p class="form-message" id="auth-message" role="status"></p>
+            </form>
+          </div>
+          <div id="notebook" hidden>
+            <div class="notebook-heading">
+              <div>
+                <span class="eyebrow">PRIVATE WORKSPACE</span>
+                <h2 id="welcome">Your notebook</h2>
+              </div>
+              <button id="logout" class="btn secondary" type="button">
+                Sign out
+              </button>
+            </div>
+            <p id="session-info" class="muted"></p>
+            <form id="note-form">
+              <label for="note-body">What did you learn?</label
+              ><textarea
+                id="note-body"
+                maxlength="1000"
+                rows="4"
+                placeholder="Today I learned why hashing and encryption are different…"
+                required
+              ></textarea>
+              <div class="note-form-bottom">
+                <small id="note-count">0 / 1,000 characters</small
+                ><button class="btn primary" id="save-note">
+                  Save private note
+                </button>
+              </div>
+            </form>
+            <p id="note-message" class="form-message" role="status"></p>
+            <div id="notes"></div>
+          </div>
+          <div id="offline" hidden>
+            <span class="eyebrow">SERVER NEEDED</span>
+            <h2>The notebook needs its backend.</h2>
+            <p>
+              This page is available on the static portfolio, but accounts and
+              notes need the included Node.js server.
+            </p>
+            <p>
+              From the project folder, run <code>npm install</code>, then
+              <code>npm start</code>. Open
+              <a href="http://localhost:3000/security-lab.html"
+                >localhost:3000/security-lab.html</a
+              >.
+            </p>
+            <button id="retry-lab" class="btn secondary">
+              Try connecting again
+            </button>
+          </div>
+        </div>
+        <aside class="lab-explainer">
+          <span class="eyebrow">WHAT’S HAPPENING HERE?</span>
+          <h2>Small actions.<br />Real protections.</h2>
+          <div class="protection">
+            <span>01</span>
+            <div>
+              <h3>Prove it’s you</h3>
+              <p>
+                Your password is checked against a salted hash. The original
+                password is never stored.
+              </p>
+            </div>
+          </div>
+          <div class="protection">
+            <span>02</span>
+            <div>
+              <h3>Your notes stay yours</h3>
+              <p>
+                The server checks ownership for every read and delete. Another
+                account cannot access your notes.
+              </p>
+            </div>
+          </div>
+          <div class="protection">
+            <span>03</span>
+            <div>
+              <h3>Protect the stored text</h3>
+              <p>
+                Note content is encrypted before it reaches SQLite. The key
+                stays on the server.
+              </p>
+            </div>
+          </div>
+          <a class="text-link" href="architecture.html"
+            >Explore all nine components →</a
+          >
+          <p class="small muted">
+            Classroom demo · Use study notes, not sensitive personal
+            information. No password recovery is included.
+          </p>
+        </aside>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div>
+          <a href="index.html" class="footer-brand">youssef<span>.</span></a>
+          <p>Learning technology. Building with purpose.</p>
+        </div>
+        <div class="footer-meta">
+          Kean University · Information Technology<br />Personal portfolio &amp;
+          computer security coursework
+        </div>
+        <a href="architecture.html">Built with security in mind ↗</a>
+      </div>
+    </footer>
+    <button
+      class="chat-launcher"
+      id="chat-launcher"
+      aria-expanded="false"
+      aria-controls="chat-window"
+    >
+      <span aria-hidden="true">✳</span> Ask the assistant
+    </button>
+    <section
+      id="chat-window"
+      class="chat-window"
+      aria-label="Portfolio assistant"
+      hidden
+    >
+      <div class="chat-header">
+        <div>
+          <strong>Portfolio assistant</strong
+          ><small>Local answers · no external AI service</small>
+        </div>
+        <button id="chat-reset" aria-label="Clear conversation">↺</button
+        ><button id="chat-close" aria-label="Close assistant">×</button>
+      </div>
+      <div class="chat-suggestions">
+        <button data-question="Who is Youssef?">About Youssef</button
+        ><button data-question="How does authentication work?">
+          Sign-in security</button
+        ><button data-question="Explain the architecture">Architecture</button>
+      </div>
+      <div
+        id="chat-messages"
+        class="chat-messages"
+        role="log"
+        aria-live="polite"
+        aria-relevant="additions"
+      ></div>
+      <form id="chat-form" class="chat-form">
+        <label class="sr-only" for="chat-input">Your question</label
+        ><input
+          id="chat-input"
+          maxlength="400"
+          placeholder="Ask about the portfolio…"
+          autocomplete="off"
+          required
+        /><button aria-label="Send question">↑</button>
+      </form>
+      <p class="chat-footnote">
+        Answers from this portfolio. Please don’t share passwords.
+      </p>
+    </section>
+  </body>
+</html>
