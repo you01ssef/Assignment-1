@@ -154,3 +154,5 @@
     max-height: calc(100dvh - 98px);
   }
 }
+/* Nova's optional, user-controlled speech. */
+.read-aloud{display:block;margin-top:10px;border:1px solid #b7cabc;border-radius:20px;padding:5px 10px;background:#fff;color:#146557;font-size:11px;cursor:pointer}.read-aloud[aria-pressed=true]{background:#146557;color:#fff}.read-aloud:disabled{opacity:.55;cursor:default}.chat-header strong:before{content:'✳ ';color:#d4eb98}.chat-launcher:hover{background:#146557}.chat-message a{margin-bottom:5px}
