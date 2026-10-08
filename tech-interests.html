@@ -171,18 +171,18 @@
       aria-expanded="false"
       aria-controls="chat-window"
     >
-      <span aria-hidden="true">✳</span> Ask the assistant
+      <span aria-hidden="true">✳</span> Ask Nova
     </button>
     <section
       id="chat-window"
       class="chat-window"
-      aria-label="Portfolio assistant"
+      aria-label="Nova · Portfolio helper"
       hidden
     >
       <div class="chat-header">
         <div>
-          <strong>Portfolio assistant</strong
-          ><small>Local answers · no external AI service</small>
+          <strong>Nova · Portfolio helper</strong
+          ><small>Website guide · Math · Read aloud</small>
         </div>
         <button id="chat-reset" aria-label="Clear conversation">↺</button
         ><button id="chat-close" aria-label="Close assistant">×</button>
@@ -191,7 +191,7 @@
         <button data-question="Who is Youssef?">About Youssef</button
         ><button data-question="How does authentication work?">
           Sign-in security</button
-        ><button data-question="Explain the architecture">Architecture</button>
+        ><button data-question="15% of 240">Try math</button>
       </div>
       <div
         id="chat-messages"
@@ -205,13 +205,13 @@
         ><input
           id="chat-input"
           maxlength="400"
-          placeholder="Ask about the portfolio…"
+          placeholder="Ask about the site or try 12 × 8…"
           autocomplete="off"
           required
         /><button aria-label="Send question">↑</button>
       </form>
       <p class="chat-footnote">
-        Answers from this portfolio. Please don’t share passwords.
+        Local helper, not generative AI. Voice availability depends on your browser.
       </p>
     </section>
   </body>

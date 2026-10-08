@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <script src="css/js/main.js" defer></script>
     <script type="module" src="css/js/chatbot.js"></script>
-    <script src="css/js/lab.js" defer></script>
+    <script type="module" src="css/js/lab.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -44,162 +44,7 @@
         </nav>
       </div>
     </header>
-    <main id="main-content">
-      <div class="page-header">
-        <div class="eyebrow">A PRACTICAL SECURITY DEMO</div>
-        <h1 class="page-title">
-          Your own little<br /><em>security notebook.</em>
-        </h1>
-        <p class="page-subtitle">
-          Save what you’re learning in a private notebook. Simple on the
-          surface, with real access checks behind it.
-        </p>
-      </div>
-      <div id="lab-status" class="notice" role="status">
-        Connecting to the security lab…
-      </div>
-      <section class="lab-grid">
-        <div class="panel lab-workspace">
-          <div id="auth-area" hidden>
-            <div class="form-tabs">
-              <button
-                id="login-tab"
-                class="selected"
-                type="button"
-                aria-pressed="true"
-              >
-                Sign in</button
-              ><button id="register-tab" type="button" aria-pressed="false">
-                Create account
-              </button>
-            </div>
-            <h2 id="auth-title">Welcome back.</h2>
-            <p class="muted" id="auth-description">
-              Sign in to open your private notes.
-            </p>
-            <form id="auth-form">
-              <label for="username">Username</label
-              ><input
-                id="username"
-                name="username"
-                autocomplete="username"
-                required
-                minlength="3"
-                maxlength="24"
-                pattern="[A-Za-z0-9_]{3,24}"
-                aria-describedby="username-help"
-              /><small id="username-help"
-                >3–24 letters, numbers, or underscores.</small
-              ><label for="password">Password</label
-              ><input
-                id="password"
-                name="password"
-                type="password"
-                autocomplete="current-password"
-                required
-                minlength="12"
-                maxlength="128"
-                aria-describedby="password-help"
-              /><small id="password-help"
-                >12–128 characters. A memorable passphrase works well.</small
-              ><button class="btn primary full" id="auth-submit">
-                Sign in →
-              </button>
-              <p class="form-message" id="auth-message" role="status"></p>
-            </form>
-          </div>
-          <div id="notebook" hidden>
-            <div class="notebook-heading">
-              <div>
-                <span class="eyebrow">PRIVATE WORKSPACE</span>
-                <h2 id="welcome">Your notebook</h2>
-              </div>
-              <button id="logout" class="btn secondary" type="button">
-                Sign out
-              </button>
-            </div>
-            <p id="session-info" class="muted"></p>
-            <form id="note-form">
-              <label for="note-body">What did you learn?</label
-              ><textarea
-                id="note-body"
-                maxlength="1000"
-                rows="4"
-                placeholder="Today I learned why hashing and encryption are different…"
-                required
-              ></textarea>
-              <div class="note-form-bottom">
-                <small id="note-count">0 / 1,000 characters</small
-                ><button class="btn primary" id="save-note">
-                  Save private note
-                </button>
-              </div>
-            </form>
-            <p id="note-message" class="form-message" role="status"></p>
-            <div id="notes"></div>
-          </div>
-          <div id="offline" hidden>
-            <span class="eyebrow">SERVER NEEDED</span>
-            <h2>The notebook needs its backend.</h2>
-            <p>
-              This page is available on the static portfolio, but accounts and
-              notes need the included Node.js server.
-            </p>
-            <p>
-              From the project folder, run <code>npm install</code>, then
-              <code>npm start</code>. Open
-              <a href="http://localhost:3000/security-lab.html"
-                >localhost:3000/security-lab.html</a
-              >.
-            </p>
-            <button id="retry-lab" class="btn secondary">
-              Try connecting again
-            </button>
-          </div>
-        </div>
-        <aside class="lab-explainer">
-          <span class="eyebrow">WHAT’S HAPPENING HERE?</span>
-          <h2>Small actions.<br />Real protections.</h2>
-          <div class="protection">
-            <span>01</span>
-            <div>
-              <h3>Prove it’s you</h3>
-              <p>
-                Your password is checked against a salted hash. The original
-                password is never stored.
-              </p>
-            </div>
-          </div>
-          <div class="protection">
-            <span>02</span>
-            <div>
-              <h3>Your notes stay yours</h3>
-              <p>
-                The server checks ownership for every read and delete. Another
-                account cannot access your notes.
-              </p>
-            </div>
-          </div>
-          <div class="protection">
-            <span>03</span>
-            <div>
-              <h3>Protect the stored text</h3>
-              <p>
-                Note content is encrypted before it reaches SQLite. The key
-                stays on the server.
-              </p>
-            </div>
-          </div>
-          <a class="text-link" href="architecture.html"
-            >Explore all nine components →</a
-          >
-          <p class="small muted">
-            Classroom demo · Use study notes, not sensitive personal
-            information. No password recovery is included.
-          </p>
-        </aside>
-      </section>
-    </main>
+    <main id="main-content"><div class="page-header"><div class="eyebrow">LIVE ON GITHUB PAGES · NO SETUP</div><h1 class="page-title">A little notebook.<br><em>A hands-on security lesson.</em></h1><p class="page-subtitle">Create, write, lock, and unlock—right here in your browser.</p></div><div class="notice"><strong>Browser-only classroom demo.</strong> Notes are encrypted and saved on this device, not uploaded to GitHub. This is not a real account system. Clearing site data deletes notes; forgotten passphrases cannot be recovered. Use practice notes only.</div><p id="lab-status" class="notice" role="status">Opening browser storage…</p><section class="lab-grid"><div class="panel"><div id="auth-area" hidden><div class="form-tabs"><button id="login-tab" aria-pressed="true" class="selected">Unlock</button><button id="register-tab" aria-pressed="false">Create notebook</button></div><h2 id="auth-title">Welcome back.</h2><p id="auth-description">First visit? Choose Create notebook. No downloads needed.</p><form id="auth-form"><label for="username">Notebook name</label><input id="username" autocomplete="username" pattern="[A-Za-z0-9_]{3,24}" minlength="3" maxlength="24" required><small>3–24 letters, numbers, or underscores.</small><label for="password">Passphrase</label><input id="password" type="password" autocomplete="current-password" minlength="12" maxlength="128" required><small>12–128 characters. Remember it—there is no reset.</small><button id="auth-submit" class="btn primary full">Unlock notebook →</button><p id="auth-message" class="form-message" role="status"></p></form></div><div id="notebook" hidden><div class="notebook-heading"><h2 id="welcome">Your notebook</h2><button id="logout" class="btn secondary">Lock</button></div><p id="session-info" class="muted"></p><form id="note-form"><label for="note-body">What did you learn?</label><textarea id="note-body" rows="4" maxlength="1000" required placeholder="Today I learned…"></textarea><div class="note-form-bottom"><small id="note-count">0 / 1,000 characters</small><button id="save-note" class="btn primary">Save note</button></div></form><p id="note-message" class="form-message" role="status"></p><div id="notes"></div></div></div><aside class="lab-explainer"><div class="eyebrow">SIMPLE BY DESIGN</div><h2>Try it in a minute.</h2><div class="protection"><span>01</span><div><h3>Create a notebook</h3><p>Pick a name and a memorable passphrase. Your browser derives an encryption key.</p></div></div><div class="protection"><span>02</span><div><h3>Save a study note</h3><p>AES-GCM encrypts the note collection before browser storage saves it.</p></div></div><div class="protection"><span>03</span><div><h3>Lock and return</h3><p>Lock clears the key from memory. Unlock in the same browser using your passphrase.</p></div></div><a class="text-link" href="architecture.html">How this maps to the assignment →</a></aside></section></main>
     <footer>
       <div class="footer-container">
         <div>
@@ -219,18 +64,18 @@
       aria-expanded="false"
       aria-controls="chat-window"
     >
-      <span aria-hidden="true">✳</span> Ask the assistant
+      <span aria-hidden="true">✳</span> Ask Nova
     </button>
     <section
       id="chat-window"
       class="chat-window"
-      aria-label="Portfolio assistant"
+      aria-label="Nova · Portfolio helper"
       hidden
     >
       <div class="chat-header">
         <div>
-          <strong>Portfolio assistant</strong
-          ><small>Local answers · no external AI service</small>
+          <strong>Nova · Portfolio helper</strong
+          ><small>Website guide · Math · Read aloud</small>
         </div>
         <button id="chat-reset" aria-label="Clear conversation">↺</button
         ><button id="chat-close" aria-label="Close assistant">×</button>
@@ -239,7 +84,7 @@
         <button data-question="Who is Youssef?">About Youssef</button
         ><button data-question="How does authentication work?">
           Sign-in security</button
-        ><button data-question="Explain the architecture">Architecture</button>
+        ><button data-question="15% of 240">Try math</button>
       </div>
       <div
         id="chat-messages"
@@ -253,13 +98,13 @@
         ><input
           id="chat-input"
           maxlength="400"
-          placeholder="Ask about the portfolio…"
+          placeholder="Ask about the site or try 12 × 8…"
           autocomplete="off"
           required
         /><button aria-label="Send question">↑</button>
       </form>
       <p class="chat-footnote">
-        Answers from this portfolio. Please don’t share passwords.
+        Local helper, not generative AI. Voice availability depends on your browser.
       </p>
     </section>
   </body>
