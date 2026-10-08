@@ -1,3 +1,4 @@
+import { mathAnswer } from "./math.js";
 const knowledge = [
   {
     id: "bio",
@@ -124,7 +125,7 @@ const knowledge = [
       "otp",
       "token demo",
     ],
-    text: "Youssef uses two-factor authentication on important accounts. The website’s code widget is only a browser-based learning demo. The Security Lab’s real login uses a password; real MFA isn’t implemented.",
+    text: "Youssef uses two-factor authentication on important accounts. The code widget illustrates the concept only. Neither the browser notebook nor optional password-login backend implements real MFA.",
     page: "cybersecurity.html",
   },
   {
@@ -143,7 +144,7 @@ const knowledge = [
       "how does the website work",
       "stack",
     ],
-    text: "The lab has three main parts: a plain HTML/CSS/JavaScript frontend, a Node.js + Express server and application layer, and a SQLite database. The server handles authentication, authorization, encryption, sessions, and validation. See the architecture page for all nine requirements.",
+    text: "The live site runs on GitHub Pages: HTML/CSS/JavaScript, browser application logic, and encrypted browser storage. The Architecture page distinguishes this demonstration from the optional Express/SQLite backend in the repository.",
     page: "architecture.html",
   },
   {
@@ -160,7 +161,7 @@ const knowledge = [
       "registration",
       "account",
     ],
-    text: "Authentication answers ‘who are you?’ The lab checks your username and password on the server. Passwords are stored as salted scrypt hashes, not readable text. Successful login creates a new session; repeated attempts are rate limited.",
+    text: "The live demo unlocks a notebook using a passphrase-derived encryption key. This is a browser encryption demonstration, not a real server account. The optional Node backend separately implements password login.",
     page: "security-lab.html",
   },
   {
@@ -174,7 +175,7 @@ const knowledge = [
       "other users",
       "access control",
     ],
-    text: "Authorization answers ‘what may you access?’ Public visitors can read the portfolio. Signed-in users can read and delete only their own notes. The server checks the session’s user ID in every note query; changing an ID in the browser doesn’t grant access.",
+    text: "Browser notebook names separate encrypted notebooks, but client-side UI checks are not server authorization. For real multi-user access control, the optional backend checks each note\u2019s owner on the server.",
     page: "architecture.html",
   },
   {
@@ -190,7 +191,7 @@ const knowledge = [
       "https",
       "tls",
     ],
-    text: "Private note text is encrypted with AES-256-GCM before storage. Passwords use one-way salted scrypt hashes, which are different from reversible encryption. Public hosting must provide HTTPS for data in transit; the local classroom demo uses HTTP on localhost.",
+    text: "The live notebook derives an AES-256-GCM encryption key from your passphrase using PBKDF2 with a random salt. Only encrypted notes are saved in browser storage. The passphrase and unlocked key are not saved. GitHub Pages serves the site over HTTPS.",
     page: "architecture.html",
   },
   {
@@ -206,7 +207,7 @@ const knowledge = [
       "expire",
       "expiration",
     ],
-    text: "Sessions last 30 minutes. A random token is stored in an HttpOnly, SameSite=Strict cookie; the database stores only its hash. Login replaces the session and logout revokes it. Production cookies also use Secure so they travel only over HTTPS.",
+    text: "The live notebook keeps its unlocked key only in memory. It locks after 15 minutes, on refresh, or when you press Lock. This is a demo session, not a server session cookie.",
     page: "architecture.html",
   },
   {
@@ -219,19 +220,19 @@ const knowledge = [
       "sql injection",
       "csrf",
     ],
-    text: "The server validates usernames, passwords, note lengths, and note IDs. Prepared SQL statements prevent user input from becoming SQL commands. Text-only rendering prevents HTML injection, and origin plus CSRF token checks protect requests that change data.",
+    text: "The live demo limits notebook names, passphrase lengths, and note lengths. Notes and chat are rendered as text, and math uses a small parser rather than eval. Browser checks are bypassable; the optional backend adds server validation and prepared SQL.",
     page: "architecture.html",
   },
   {
     id: "database",
     keywords: ["database", "sqlite", "storage", "sql"],
-    text: "SQLite keeps accounts, sessions, rate-limit counters, and encrypted notes in a server-side file. Queries use placeholders instead of joining user input into SQL. The database and encryption key aren’t served to visitors or committed to Git.",
+    text: "The live notebook uses encrypted browser storage, not a hosted database. Notes stay in this browser and do not sync. Clearing site data removes them. The optional backend still contains SQLite for the full database requirement.",
     page: "architecture.html",
   },
   {
     id: "notes",
     keywords: ["notes", "note", "notebook", "security lab", "lab"],
-    text: "Open the Security Lab, create an account, and save a study note. Each account can store up to 50 notes of 1,000 characters each. Only the owner can access them. This feature requires the Node server and won’t run on GitHub Pages alone.",
+    text: "Open the Security Lab and create a notebook with a name and passphrase. Save up to 50 short notes, then lock it. Return in the same browser and unlock it to see your notes. No server installation is needed. There is no recovery if you forget the passphrase or clear site data.",
     page: "security-lab.html",
   },
   {
@@ -244,7 +245,7 @@ const knowledge = [
       "deploy",
       "backend",
     ],
-    text: "GitHub Pages can host the public pages and this local assistant. Accounts and notes need the included Node server: run npm install, then npm start, and open localhost:3000. Public deployment also needs HTTPS, persistent storage, and a private encryption key.",
+    text: "The live Security Lab, Nova helper, and math calculator work directly on GitHub Pages with no backend setup. Encrypted notes stay in your browser. The original Node/SQLite backend remains optional classroom source code.",
     page: "architecture.html",
   },
   {
@@ -267,10 +268,14 @@ const normalize = (text) =>
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
 export function answerQuestion(question, previousTopic = null) {
+  const math = mathAnswer(question.slice(0,400));
+  if (math) return math;
   const normalized = normalize(question.slice(0, 400));
+  if (/who are you|your name|what can you do|help me|^help$|persona|nova/.test(normalized)) return {text:"I’m Nova, your digital portfolio helper. I can guide you around Youssef’s website, explain security concepts, calculate simple math, and read my replies aloud. Try 15% of 240, sqrt(81), or ‘open the lab’. I use local rules and curated answers, not a generative AI service."};
+  if (/open the lab|take me to.*lab/.test(normalized)) return {text:"Let’s try the Security Lab! Create a browser notebook, save a note, then lock and unlock it. No installation needed.",page:"security-lab.html",id:"notes"};
   if (/^(hi|hello|hey|good morning|good evening)$/.test(normalized))
     return {
-      text: "Hello! I can help you explore Youssef’s portfolio or explain the Security Lab. Try “How are notes protected?” or “What career interests him?”",
+      text: "Hello! I’m Nova. I can help you explore Youssef’s portfolio, do simple math, or explain the Security Lab. Try “How are notes protected?” or “What career interests him?”",
     };
   if (/^(thanks|thank you|thank you so much|great|cool)$/.test(normalized))
     return {
@@ -314,7 +319,7 @@ export function answerQuestion(question, previousTopic = null) {
     return {
       id: "authorization",
       page: "architecture.html",
-      text: "Authentication verifies who you are (signing in with your password). Authorization checks what you can do (reading or deleting only your own notes). The server enforces both; a hidden button alone is not security.",
+      text: "Authentication verifies who you are (signing in with your password). Authorization checks what you can do (reading or deleting only your own notes). The optional backend enforces both. The live browser notebook demonstrates unlocking only; a hidden button alone is not authorization.",
     };
   }
   return best;
@@ -325,6 +330,8 @@ if (typeof document !== "undefined") {
     launcher = $("chat-launcher"),
     messages = $("chat-messages");
   let previousTopic = null;
+  const speechSupported = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+  function stopSpeech() { if(speechSupported) speechSynthesis.cancel(); document.querySelectorAll('.read-aloud').forEach(b=>{b.textContent='Read aloud';b.setAttribute('aria-pressed','false');}); }
   function addMessage(text, user = false, page = null) {
     const item = document.createElement("div");
     item.className = `chat-message${user ? " user" : ""}`;
@@ -335,18 +342,33 @@ if (typeof document !== "undefined") {
       link.textContent = "Explore this page →";
       item.append(link);
     }
+    if (!user) {
+      const read = document.createElement('button'); read.className = 'read-aloud'; read.textContent = speechSupported ? 'Read aloud' : 'Voice unavailable'; read.disabled = !speechSupported; read.setAttribute('aria-pressed','false');
+      read.addEventListener('click', () => {
+        const playing = read.getAttribute('aria-pressed') === 'true'; stopSpeech(); if(playing)return;
+        const utterance = new SpeechSynthesisUtterance(text); utterance.lang = 'en-US'; utterance.rate = 1;
+        const voices = speechSynthesis.getVoices(); const voice = voices.find(v=>v.localService && v.lang.startsWith('en')); if(voice) utterance.voice=voice;
+        read.textContent = 'Stop reading'; read.setAttribute('aria-pressed','true');
+        utterance.onend = () => {read.textContent='Read aloud';read.setAttribute('aria-pressed','false');};
+        utterance.onerror = () => {read.textContent='Voice unavailable — retry';read.setAttribute('aria-pressed','false');};
+        speechSynthesis.speak(utterance);
+      }); item.append(read);
+    }
     messages.append(item);
     while (messages.children.length > 40) messages.firstElementChild.remove();
     messages.scrollTop = messages.scrollHeight;
   }
+  window.addEventListener("pagehide", stopSpeech);
   function reset() {
+    stopSpeech();
     previousTopic = null;
     messages.replaceChildren();
     addMessage(
-      "Hi, I’m your portfolio guide. Ask about Youssef, his IT interests, or how the Security Lab works. I use curated local answers, so I’ll tell you when I don’t know.",
+      "Hi, I’m Nova ✳ Your digital portfolio helper. Ask about Youssef, explore the lab, or try “15% of 240”. Tap Read aloud on any reply to hear it. I use local rules, not a generative AI service.",
     );
   }
   function open(value) {
+    if(!value) stopSpeech();
     windowEl.hidden = !value;
     launcher.setAttribute("aria-expanded", String(value));
     (value ? $("chat-input") : launcher).focus();
