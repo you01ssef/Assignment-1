@@ -53,3 +53,35 @@ Tests cover the optional server’s security controls, Nova’s matching and mat
 - `architecture.html`: requirement mapping and limitations
 
 References: [Web Crypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/deriveKey), [speech synthesis](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis), [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
+
+## Computer security research project
+
+The site now includes a controlled SQL input lesson and a reproducible phishing website classification project.
+
+- [Research overview](phishing-study.html): dataset, EDA, model comparison, errors, charts, and limitations.
+- [Secure input lesson](input-security.html): vulnerable SQL construction versus prepared statements, input validation, and least-privilege database access. Its interactive example displays query text only; it never connects to or executes SQL.
+- [One-page proposal](reports/proposal.md)
+- [Full report](reports/report.md)
+- [Feature dictionary](reports/feature_dictionary.md)
+- [Executed Jupyter notebook](analysis/phishing_analysis.ipynb)
+- [Presentation deck](presentation/Phishing_Website_Detection.pptx)
+- [Presentation timing and talk guide](reports/presentation-notes.md)
+
+### Dataset and analysis setup
+
+The selected dataset is Akash Kumar’s [Phishing website dataset on Kaggle](https://www.kaggle.com/datasets/akashkr/phishing-website-dataset), a Kaggle mirror of the [UCI Phishing Websites benchmark](https://archive.ics.uci.edu/dataset/327/phishing+websites). The CSV has 11,055 records, 30 predictor features, a sequential index, and the `Result` label. See [data/README.md](data/README.md) for citation and download steps. The raw CSV is not checked into the repository.
+
+With Python 3.10 or newer, download the dataset as described in `data/README.md`, then:
+
+```sh
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
+python -m pip install -r requirements-analysis.txt
+python -m pip install kaggle
+kaggle datasets download -d akashkr/phishing-website-dataset --unzip -p data
+jupyter lab analysis/phishing_analysis.ipynb
+```
+
+The notebook reports EDA, repeated feature profiles, missing cells, and class distribution; it compares class-weighted Logistic Regression and Random Forest in a stratified grouped split; and evaluates accuracy, phishing precision/recall/F1, ROC-AUC, FPR, FNR, confusion matrices, and permutation importance. Its rendered charts and metrics are in `reports/`. The project report interprets missed phishing as a user-harm path and false alarms as review/access costs. Results are from a static historical benchmark and do not certify a live site as safe.
+
+The optional Node server explicitly serves the added pages and project artifacts. Run `npm install && npm start` for the local site; `npm test` runs the repository’s existing server and browser-feature checks.
