@@ -1275,3 +1275,51 @@ footer p {
     animation: none !important;
   }
 }
+
+/* Security research and assignment pages */
+.research-panel { margin: 28px 0; padding: 34px 38px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); }
+.research-panel h2 { margin-bottom: 18px; }
+.research-panel > p { max-width: 920px; }
+.research-panel a { color: var(--accent); }
+.research-question { border-left: 5px solid var(--accent); }
+.research-actions { margin-top: 20px; }
+.research-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 24px 0; }
+.research-stats div { display: flex; flex-direction: column; gap: 5px; padding: 18px; background: #f1f5f0; border-radius: 10px; }
+.research-stats strong { color: var(--accent); font-size: 28px; line-height: 1.1; }
+.research-stats span { color: var(--muted); font-size: 13px; }
+.figure-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin: 28px 0; }
+.research-figure { margin: 0; padding: 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; }
+.research-figure img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.research-figure figcaption { padding: 12px 4px 2px; color: var(--muted); font-size: 13px; }
+.research-list, .defense-list { padding-left: 24px; color: var(--muted); }
+.research-list li, .defense-list li { margin: 12px 0; padding-left: 5px; }
+.research-list strong, .defense-list strong { color: var(--ink); }
+.table-scroll { overflow-x: auto; }
+.metrics-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.metrics-table caption { padding: 0 0 12px; color: var(--muted); text-align: left; }
+.metrics-table th, .metrics-table td { padding: 12px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+.metrics-table th:first-child { text-align: left; }
+.metrics-table thead th { color: var(--accent); font-size: 12px; }
+.metrics-table tbody th { color: var(--ink); }
+.deliverable-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.deliverable-links a { display: inline-block; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; text-decoration: none; font-weight: 600; }
+.code-compare, .demo-output { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; margin-top: 22px; }
+.code-card, .demo-output > div { padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: #f9faf7; min-width: 0; }
+.code-card h3, .demo-output h3 { margin-bottom: 12px; font-size: 17px; }
+.code-card pre, .demo-output pre { overflow-wrap: anywhere; white-space: pre-wrap; padding: 14px; background: #172c30; color: #f7f8f4; border-radius: 8px; font: 13px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.code-card.unsafe { border-top: 4px solid #bd5b3d; }
+.code-card.safe { border-top: 4px solid var(--accent); }
+.sql-demo-form { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; margin: 22px 0; }
+.sql-demo-form label { width: 100%; color: var(--ink); font-weight: 600; }
+.sql-demo-form input { flex: 1 1 280px; max-width: 520px; padding: 12px; border: 1px solid var(--line); border-radius: 7px; }
+.demo-note { font-size: 13px; }
+.research-banner { display:flex; justify-content:space-between; align-items:center; gap:28px; margin:32px 0; padding:34px 38px; background:var(--navy); color:#fff; border-radius:var(--radius); }
+.research-banner p { max-width:700px; margin-bottom:0; color:#dce8e1; }
+.research-banner h2 { color:#fff; }
+@media (max-width: 760px) {
+  .research-panel { padding: 24px 20px; }
+  .research-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .figure-grid, .code-compare, .demo-output { grid-template-columns: 1fr; }
+  .research-banner { display:block; padding:26px 22px; }
+  .research-banner .btn { margin-top:18px; }
+}
