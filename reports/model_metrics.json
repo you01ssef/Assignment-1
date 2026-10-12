@@ -1,0 +1,30 @@
+[
+  {
+    "model": "Logistic Regression",
+    "accuracy": 0.9208860759493671,
+    "precision_phishing": 0.9205851619644723,
+    "recall_phishing": 0.8989795918367347,
+    "f1_phishing": 0.9096541042849767,
+    "roc_auc": 0.9785325006626027,
+    "false_positive_rate": 0.06168831168831169,
+    "false_negative_rate": 0.10102040816326531,
+    "tn": 1156,
+    "fp": 76,
+    "fn": 99,
+    "tp": 881
+  },
+  {
+    "model": "Random Forest",
+    "accuracy": 0.9520795660036167,
+    "precision_phishing": 0.9668803418803419,
+    "recall_phishing": 0.923469387755102,
+    "f1_phishing": 0.9446764091858038,
+    "roc_auc": 0.9920578783461436,
+    "false_positive_rate": 0.025162337662337664,
+    "false_negative_rate": 0.07653061224489796,
+    "tn": 1201,
+    "fp": 31,
+    "fn": 75,
+    "tp": 905
+  }
+]
