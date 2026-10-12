@@ -257,7 +257,7 @@ const knowledge = [
   {
     id: "navigation",
     keywords: ["pages", "navigation", "links", "menu"],
-    text: "You can explore Home, About, Technology, Cybersecurity, Threat Model, Architecture, and the Security Lab. The Architecture page is the best place to see how the assignment requirements are implemented.",
+    text: "You can explore Home, About, Technology, Cybersecurity, Research, Threat Model, Architecture, and the Security Lab. The Research page covers phishing website classification; Secure Input compares vulnerable SQL construction with parameterized queries.",
     page: "architecture.html",
   },
 ];
