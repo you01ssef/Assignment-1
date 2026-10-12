@@ -299,6 +299,8 @@ export async function createApp({
     "about",
     "tech-interests",
     "cybersecurity",
+    "input-security",
+    "phishing-study",
     "threat-model",
     "architecture",
     "security-lab",
@@ -308,6 +310,9 @@ export async function createApp({
       (req, res) => res.sendFile(path.join(root, `${page}.html`)),
     );
   app.use("/css", express.static(path.join(root, "css"), { dotfiles: "deny" }));
+  app.use("/analysis", express.static(path.join(root, "analysis"), { dotfiles: "deny" }));
+  app.use("/reports", express.static(path.join(root, "reports"), { dotfiles: "deny" }));
+  app.use("/presentation", express.static(path.join(root, "presentation"), { dotfiles: "deny" }));
   app.use((req, res) => res.status(404).send("Page not found."));
   app.use((error, req, res, next) => {
     const status =
