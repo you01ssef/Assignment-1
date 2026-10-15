@@ -1,6 +1,12 @@
 import { mathAnswer } from "./math.js";
 const knowledge = [
   {
+    id: "research-notebook",
+    keywords: ["jupyter", "ipynb", "colab", "analysis notebook", "phishing notebook"],
+    text: "The Research page links to the executed phishing analysis notebook on this website. Choose Run in Colab to execute it online, then Runtime → Run all. The notebook loads the Kaggle dataset automatically and compares Logistic Regression with Random Forest.",
+    page: "phishing-study.html",
+  },
+  {
     id: "bio",
     keywords: [
       "who is youssef",
