@@ -2,6 +2,14 @@
 
 **Open https://you01ssef.github.io/Assignment-1/ — no installation or local server needed.**
 
+## Phishing analysis notebook
+
+[Read the full notebook on the website](https://you01ssef.github.io/Assignment-1/analysis/phishing_analysis.html).
+
+[Read the executed notebook](analysis/phishing_analysis.ipynb) · [Run in Google Colab](https://colab.research.google.com/github/you01ssef/Assignment-1/blob/main/analysis/phishing_analysis.ipynb) · [Research page](https://you01ssef.github.io/Assignment-1/phishing-study.html)
+
+In Colab, connect to a Python runtime and choose **Runtime → Run all**. The notebook installs missing libraries and downloads the public Kaggle dataset when a local CSV is unavailable. Its saved outputs include the charts, model results, and a conclusion calculated from those results. The Security Lab's encrypted study notes are a separate browser demo.
+
 ## Try it
 
 1. Open Security Lab and choose **Create notebook**.
@@ -58,8 +66,8 @@ References: [Web Crypto](https://developer.mozilla.org/en-US/docs/Web/API/Subtle
 
 The site now includes a controlled SQL input lesson and a reproducible phishing website classification project.
 
-- [Research overview](phishing-study.html): dataset, EDA, model comparison, errors, charts, and limitations.
-- [Secure input lesson](input-security.html): vulnerable SQL construction versus prepared statements, input validation, and least-privilege database access. Its interactive example displays query text only; it never connects to or executes SQL.
+- [Research overview](https://you01ssef.github.io/Assignment-1/phishing-study.html): dataset, EDA, model comparison, errors, charts, and limitations.
+- [Secure input lesson](https://you01ssef.github.io/Assignment-1/input-security.html): vulnerable SQL construction versus prepared statements, input validation, and least-privilege database access. Its interactive example displays query text only; it never connects to or executes SQL.
 - [One-page proposal](reports/proposal.md)
 - [Full report](reports/report.md)
 - [Feature dictionary](reports/feature_dictionary.md)
@@ -71,16 +79,19 @@ The site now includes a controlled SQL input lesson and a reproducible phishing 
 
 The selected dataset is Akash Kumar’s [Phishing website dataset on Kaggle](https://www.kaggle.com/datasets/akashkr/phishing-website-dataset), a Kaggle mirror of the [UCI Phishing Websites benchmark](https://archive.ics.uci.edu/dataset/327/phishing+websites). The CSV has 11,055 records, 30 predictor features, a sequential index, and the `Result` label. See [data/README.md](data/README.md) for citation and download steps. The raw CSV is not checked into the repository.
 
-With Python 3.10 or newer, download the dataset as described in `data/README.md`, then:
+For a local run, use Python 3.11 or newer and run these commands from the repository folder:
 
 ```sh
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
+source .venv/bin/activate
+# Windows PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install -r requirements-analysis.txt
-python -m pip install kaggle
-kaggle datasets download -d akashkr/phishing-website-dataset --unzip -p data
 jupyter lab analysis/phishing_analysis.ipynb
 ```
+
+Choose **Restart Kernel and Run All Cells**. The loader uses `data/dataset.csv` if present, otherwise downloads Kaggle version 2 using KaggleHub. If internet access is unavailable, download that CSV beforehand or set `DATA_FILE` in the notebook. No API token is needed for this public dataset under its current access settings; any Kaggle consent request must be completed on Kaggle.
+
+The core library versions are pinned in `requirements-analysis.txt`. The notebook records the dataset checksum, library versions, random seed, and split sizes in [reports/run_manifest.json](reports/run_manifest.json). Colab's preinstalled library versions may differ; use the pinned environment to reproduce the saved results most closely.
 
 The notebook reports EDA, repeated feature profiles, missing cells, and class distribution; it compares class-weighted Logistic Regression and Random Forest in a stratified grouped split; and evaluates accuracy, phishing precision/recall/F1, ROC-AUC, FPR, FNR, confusion matrices, and permutation importance. Its rendered charts and metrics are in `reports/`. The project report interprets missed phishing as a user-harm path and false alarms as review/access costs. Results are from a static historical benchmark and do not certify a live site as safe.
 

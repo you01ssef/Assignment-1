@@ -23,23 +23,40 @@
         <div class="page-badge">Cybersecurity · Machine learning</div>
         <h1 class="page-title">Phishing website detection</h1>
         <p class="page-subtitle">A reproducible comparison of Logistic Regression and Random Forest on engineered website indicators—with the costs of missed attacks and false alarms kept in view.</p>
-        <div class="actions research-actions"><a class="btn primary" href="analysis/phishing_analysis.ipynb">Open the Jupyter notebook ↓</a><a class="text-link" href="reports/report.md">Read the full report →</a></div>
+        <div class="actions research-actions"><a class="btn primary" href="analysis/phishing_analysis.html">Read the notebook →</a><a class="btn secondary" href="https://colab.research.google.com/github/you01ssef/Assignment-1/blob/main/analysis/phishing_analysis.ipynb">Run in Colab ↗</a><a class="text-link" href="https://github.com/you01ssef/Assignment-1/blob/main/reports/report.md">Read the report →</a></div>
       </div>
+      <section class="research-panel notebook-start">
+        <h2>Read or run the analysis</h2>
+        <p><strong>Read the notebook</strong> opens the saved code, tables, and charts right here on this website. To execute it online, choose <strong>Run in Colab</strong>, connect to a Python runtime, then select <strong>Runtime → Run all</strong>.</p>
+        <p>The notebook installs missing packages and downloads the selected Kaggle dataset automatically. Results are saved in its <code>reports/</code> folder. For local setup, follow the <a href="https://github.com/you01ssef/Assignment-1#dataset-and-analysis-setup">README instructions</a>.</p>
+      </section>
       <section class="research-panel research-question">
         <h2>Research question</h2>
         <p>How well can Logistic Regression and Random Forest distinguish phishing from legitimate websites on unseen feature profiles, and what do their false positives and false negatives mean for a security workflow?</p>
-        <p><strong>Finding:</strong> on the held-out grouped split, Random Forest reached 0.952 accuracy, 0.923 phishing recall, and 0.992 ROC-AUC. It still missed 75 phishing records. These are benchmark results, not a safety guarantee for live websites.</p>
+        <p><strong>Finding:</strong> on the held-out grouped split, Random Forest reached 0.944 accuracy, 0.937 phishing recall, and 0.986 ROC-AUC. It still missed 63 phishing records. These are benchmark results, not a safety guarantee for live websites.</p>
       </section>
       <section class="research-panel">
         <h2>Dataset at a glance</h2>
-        <div class="research-stats"><div><strong>11,055</strong><span>records</span></div><div><strong>30</strong><span>predictor features</span></div><div><strong>2</strong><span>classes</span></div><div><strong>2015</strong><span>UCI donated</span></div></div>
-        <p>Source: Akash Kumar, <a href="https://www.kaggle.com/datasets/akashkr/phishing-website-dataset">Phishing website dataset on Kaggle</a>, a Kaggle mirror of the <a href="https://archive.ics.uci.edu/dataset/327/phishing+websites">UCI Phishing Websites benchmark</a>. Predictors cover URL structure, domain properties, certificate state, page links, and traffic indicators. `Result`: −1 phishing, +1 legitimate. The CSV includes a sequential index and 30 predictors plus the target; the index is dropped before modeling.</p>
-        <p>The target distribution is 4,898 phishing (44.3%) and 6,157 legitimate (55.7%). The file contains no missing cells. After removing the index, many feature profiles repeat, and 64 profiles have conflicting labels. As the data has no URL identity, those are retained rather than assumed to be duplicate sites. Identical profiles stay together in the grouped train/test split. See the <a href="reports/feature_dictionary.md">feature dictionary</a> for column definitions.</p>
+        <div class="research-stats"><div><strong>11,055</strong><span>records</span></div><div><strong>30</strong><span>predictor features</span></div><div><strong>2</strong><span>classes</span></div><div><strong>v2</strong><span>Kaggle dataset version</span></div></div>
+        <p>Source: Akash Kumar, <a href="https://www.kaggle.com/datasets/akashkr/phishing-website-dataset">Phishing website dataset on Kaggle</a>, a Kaggle mirror of the <a href="https://archive.ics.uci.edu/dataset/327/phishing+websites">UCI Phishing Websites benchmark</a>. Predictors cover URL structure, domain properties, certificate state, page links, and traffic indicators. <code>Result</code>: −1 phishing, +1 legitimate. The CSV includes a sequential index and 30 predictors plus the target; the index is dropped before modeling.</p>
+        <p>The target distribution is 4,898 phishing (44.3%) and 6,157 legitimate (55.7%). The file contains no missing cells. After removing the index, many feature profiles repeat, and 64 profiles have conflicting labels. As the data has no URL identity, those are retained rather than assumed to be duplicate sites. Identical profiles stay together in the grouped train/test split. See the <a href="https://github.com/you01ssef/Assignment-1/blob/main/reports/feature_dictionary.md">feature dictionary</a> for column definitions.</p>
+      </section>
+      <section class="research-panel">
+        <h2>Important features</h2>
+        <p>The dataset contains category codes, not raw measurements. These examples explain the signals used by the models.</p>
+        <div class="table-scroll" role="region" aria-label="Important dataset features" tabindex="0"><table class="metrics-table feature-table"><caption>Selected columns from the Kaggle CSV</caption><thead><tr><th scope="col">Feature</th><th scope="col">What it describes</th></tr></thead><tbody>
+        <tr><th scope="row"><code>SSLfinal_State</code></th><td>HTTPS and certificate state</td></tr>
+        <tr><th scope="row"><code>URL_of_Anchor</code></th><td>Page-link destinations and behavior</td></tr>
+        <tr><th scope="row"><code>URLURL_Length</code></th><td>URL length category</td></tr>
+        <tr><th scope="row"><code>having_IPhaving_IP_Address</code></th><td>IP address use instead of a domain name</td></tr>
+        <tr><th scope="row"><code>age_of_domain</code></th><td>Domain age category</td></tr>
+        <tr><th scope="row"><code>web_traffic</code></th><td>Website traffic or ranking category</td></tr>
+        </tbody></table></div>
       </section>
       <section class="figure-grid">
-        <figure class="research-figure"><img src="reports/figures/class_distribution.png" alt="Bar chart: 4,898 phishing and 6,157 legitimate records" loading="lazy" /><figcaption>Class distribution: a moderate imbalance, not a balanced 50/50 sample.</figcaption></figure>
-        <figure class="research-figure"><img src="reports/figures/feature_distributions.png" alt="Nine engineered features, split by class" loading="lazy" /><figcaption>Representative features split by class.</figcaption></figure>
-        <figure class="research-figure"><img src="reports/figures/correlation_heatmap.png" alt="Correlation heat map of strongest target-associated features" loading="lazy" /><figcaption>Correlations describe association, not causation.</figcaption></figure>
+        <figure class="research-figure"><a href="reports/figures/class_distribution.png" aria-label="View chart at full size"><img src="reports/figures/class_distribution.png" alt="Bar chart: 4,898 phishing and 6,157 legitimate records" loading="lazy" /></a><figcaption>Class distribution: a moderate imbalance, not a balanced 50/50 sample.</figcaption></figure>
+        <figure class="research-figure"><a href="reports/figures/feature_distributions.png" aria-label="View chart at full size"><img src="reports/figures/feature_distributions.png" alt="Nine engineered features, split by class" loading="lazy" /></a><figcaption>Representative features split by class.</figcaption></figure>
+        <figure class="research-figure"><a href="reports/figures/correlation_heatmap.png" aria-label="View chart at full size"><img src="reports/figures/correlation_heatmap.png" alt="Correlation heat map of strongest target-associated features" loading="lazy" /></a><figcaption>Correlations describe association, not causation.</figcaption></figure>
       </section>
       <section class="research-panel">
         <h2>Preprocessing and methods</h2>
@@ -52,25 +69,25 @@
       </section>
       <section class="research-panel">
         <h2>Held-out evaluation</h2>
-        <div class="table-scroll"><table class="metrics-table"><caption>Phishing is the positive class; default probability threshold 0.5</caption><thead><tr><th>Model</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>ROC-AUC</th><th>FPR</th><th>FNR</th></tr></thead><tbody>
-          <tr><th>Logistic Regression</th><td>0.921</td><td>0.921</td><td>0.899</td><td>0.910</td><td>0.979</td><td>0.062</td><td>0.101</td></tr>
-          <tr><th>Random Forest</th><td>0.952</td><td>0.967</td><td>0.923</td><td>0.945</td><td>0.992</td><td>0.025</td><td>0.077</td></tr>
+        <div class="table-scroll" role="region" aria-label="Model evaluation results" tabindex="0"><table class="metrics-table"><caption>Phishing is the positive class; default probability threshold 0.5</caption><thead><tr><th>Model</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>ROC-AUC</th><th>FPR</th><th>FNR</th></tr></thead><tbody>
+          <tr><th>Logistic Regression</th><td>0.922</td><td>0.900</td><td>0.930</td><td>0.915</td><td>0.974</td><td>0.085</td><td>0.070</td></tr>
+          <tr><th>Random Forest</th><td>0.944</td><td>0.939</td><td>0.937</td><td>0.938</td><td>0.986</td><td>0.050</td><td>0.063</td></tr>
         </tbody></table></div>
-        <p>Random Forest confusion counts: 1,201 legitimate correctly labeled, 31 legitimate flagged, 75 phishing missed, and 905 phishing detected. Logistic Regression: 1,156, 76, 99, and 881 respectively.</p>
+        <p>Random Forest confusion counts: 1,143 legitimate correctly labeled, 60 legitimate flagged, 63 phishing missed, and 930 phishing detected. Logistic Regression: 1,101, 102, 70, and 923 respectively.</p>
       </section>
       <section class="figure-grid">
-        <figure class="research-figure"><img src="reports/figures/confusion_matrices.png" alt="Confusion matrices for Logistic Regression and Random Forest" loading="lazy" /><figcaption>False negatives are missed phishing sites; false positives are legitimate sites flagged.</figcaption></figure>
-        <figure class="research-figure"><img src="reports/figures/roc_curves.png" alt="ROC curves for both models on held-out test data" loading="lazy" /><figcaption>ROC-AUC compares ranking; it does not choose a deployment threshold.</figcaption></figure>
-        <figure class="research-figure"><img src="reports/figures/permutation_importance.png" alt="Random Forest permutation feature importance" loading="lazy" /><figcaption>Certificate state and URL anchor features rank highest by permutation importance.</figcaption></figure>
+        <figure class="research-figure"><a href="reports/figures/confusion_matrices.png" aria-label="View chart at full size"><img src="reports/figures/confusion_matrices.png" alt="Confusion matrices for Logistic Regression and Random Forest" loading="lazy" /></a><figcaption>False negatives are missed phishing sites; false positives are legitimate sites flagged.</figcaption></figure>
+        <figure class="research-figure"><a href="reports/figures/roc_curves.png" aria-label="View chart at full size"><img src="reports/figures/roc_curves.png" alt="ROC curves for both models on held-out test data" loading="lazy" /></a><figcaption>ROC-AUC compares ranking; it does not choose a deployment threshold.</figcaption></figure>
+        <figure class="research-figure"><a href="reports/figures/permutation_importance.png" aria-label="View chart at full size"><img src="reports/figures/permutation_importance.png" alt="Random Forest permutation feature importance" loading="lazy" /></a><figcaption>Certificate state and URL anchor features rank highest by permutation importance.</figcaption></figure>
       </section>
       <section class="research-panel">
         <h2>Security implications and limits</h2>
-        <p>False negatives can allow credential theft or payment fraud; false positives can block legitimate services, waste analyst time, and contribute to warning fatigue. In this test, Random Forest missed 75 of 980 phishing records and flagged 31 of 1,232 legitimate records. That error profile might support analyst prioritization, but a live system needs current, source-separated data and a threshold matched to analyst capacity and user harm.</p>
+        <p>False negatives can allow credential theft or payment fraud; false positives can block legitimate services, waste analyst time, and contribute to warning fatigue. In this test, Random Forest missed 63 of 993 phishing records and flagged 60 of 1,203 legitimate records. That error profile might support analyst prioritization, but a live system needs current, source-separated data and a threshold matched to analyst capacity and user harm.</p>
         <p>The benchmark is historical and static. It has no URL identity, timestamps, campaign IDs, source groups, or live page content. This experiment cannot identify which attack types are hardest, prove future generalization, or treat feature importance as causation. The model should prioritize review—not automatically declare a live site safe.</p>
-        <div class="deliverable-links"><a href="reports/proposal.md">One-page proposal</a><a href="reports/report.md">Full report</a><a href="presentation/Phishing_Website_Detection.pptx">10-slide presentation</a><a href="analysis/phishing_analysis.ipynb">Executed notebook</a><a href="input-security.html">Secure input lesson</a></div>
+        <div class="deliverable-links"><a href="https://github.com/you01ssef/Assignment-1/blob/main/reports/proposal.md">One-page proposal</a><a href="https://github.com/you01ssef/Assignment-1/blob/main/reports/report.md">Full report</a><a href="presentation/Phishing_Website_Detection.pptx">10-slide presentation</a><a href="analysis/phishing_analysis.html">Executed notebook</a><a href="input-security.html">Secure input lesson</a></div>
       </section>
     </main>
-    <footer><div class="footer-container"><div><a href="index.html" class="footer-brand">youssef<span>.</span></a><p>Learning technology. Building with purpose.</p></div><div class="footer-meta">Kean University · Information Technology<br />Dataset: Kaggle · Analysis: original project work</div><a href="input-security.html">Secure input lesson ↗</a></div></footer>
+    <footer><div class="footer-container"><div><a href="index.html" class="footer-brand">youssef<span>.</span></a><p>Learning technology. Building with purpose.</p></div><div class="footer-meta">Kean University · Information Technology<br />Kaggle dataset · Reproducible analysis</div><a href="input-security.html">Secure input lesson ↗</a></div></footer>
     <button class="chat-launcher" id="chat-launcher" aria-expanded="false" aria-controls="chat-window"><span aria-hidden="true">✳</span> Ask Nova</button>
     <section id="chat-window" class="chat-window" aria-label="Nova · Portfolio helper" hidden>
       <div class="chat-header"><div><strong>Nova · Portfolio helper</strong><small>Website guide · Math · Read aloud</small></div><button id="chat-reset" aria-label="Clear conversation">↺</button><button id="chat-close" aria-label="Close assistant">×</button></div>
