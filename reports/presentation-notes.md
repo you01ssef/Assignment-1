@@ -10,7 +10,7 @@ The PowerPoint includes fuller speaker notes and source citations. Use these tim
 | 4 | EDA and duplicate handling | 1:15 | Explain class balance, no missing cells, repeated feature profiles, and why profile groups are retained. |
 | 5 | Preprocessing | 1:05 | Explain index removal, grouped stratification, fitted imputation, scaling, and class weights. |
 | 6 | Models and metrics | 1:00 | Contrast linear Logistic Regression and nonlinear Random Forest; define phishing as positive class. |
-| 7 | Results | 1:20 | Read the test metrics and confusion counts. Emphasize that Random Forest still misses 75 phishing records. |
+| 7 | Results | 1:20 | Read the test metrics and confusion counts. Emphasize that Random Forest still misses 63 phishing records. |
 | 8 | Security meaning | 1:05 | Connect false negatives to user harm and false positives to review burden and access friction. |
 | 9 | Signals and limits | 1:00 | Discuss permutation importance as predictive association; note the historical static dataset and limited validation. |
 | 10 | Conclusion | 0:50 | Recommend recent, source-separated testing and threshold calibration; invite questions. |

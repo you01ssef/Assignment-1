@@ -1,30 +1,30 @@
 [
   {
     "model": "Logistic Regression",
-    "accuracy": 0.9208860759493671,
-    "precision_phishing": 0.9205851619644723,
-    "recall_phishing": 0.8989795918367347,
-    "f1_phishing": 0.9096541042849767,
-    "roc_auc": 0.9785325006626027,
-    "false_positive_rate": 0.06168831168831169,
-    "false_negative_rate": 0.10102040816326531,
-    "tn": 1156,
-    "fp": 76,
-    "fn": 99,
-    "tp": 881
+    "accuracy": 0.9216757741347905,
+    "precision_phishing": 0.9004878048780488,
+    "recall_phishing": 0.9295065458207452,
+    "f1_phishing": 0.9147670961347869,
+    "roc_auc": 0.9740021379917109,
+    "false_positive_rate": 0.08478802992518704,
+    "false_negative_rate": 0.07049345417925479,
+    "tn": 1101,
+    "fp": 102,
+    "fn": 70,
+    "tp": 923
   },
   {
     "model": "Random Forest",
-    "accuracy": 0.9520795660036167,
-    "precision_phishing": 0.9668803418803419,
-    "recall_phishing": 0.923469387755102,
-    "f1_phishing": 0.9446764091858038,
-    "roc_auc": 0.9920578783461436,
-    "false_positive_rate": 0.025162337662337664,
-    "false_negative_rate": 0.07653061224489796,
-    "tn": 1201,
-    "fp": 31,
-    "fn": 75,
-    "tp": 905
+    "accuracy": 0.9439890710382514,
+    "precision_phishing": 0.9393939393939394,
+    "recall_phishing": 0.9365558912386707,
+    "f1_phishing": 0.9379727685325264,
+    "roc_auc": 0.9864667803468837,
+    "false_positive_rate": 0.04987531172069826,
+    "false_negative_rate": 0.0634441087613293,
+    "tn": 1143,
+    "fp": 60,
+    "fn": 63,
+    "tp": 930
   }
 ]

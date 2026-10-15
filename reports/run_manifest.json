@@ -1,0 +1,21 @@
+{
+  "dataset": "akashkr/phishing-website-dataset/versions/2",
+  "dataset_sha256": "83853a3ddf39a77e4bda0c8c907c5a7f521f16ed844299de75d215c22d5bd379",
+  "records": 11055,
+  "predictors": 30,
+  "seed": 42,
+  "split": "first fold of StratifiedGroupKFold(n_splits=5, shuffle=True)",
+  "train_records": 8859,
+  "test_records": 2196,
+  "shared_profiles": 0,
+  "positive_class": "phishing",
+  "python": "3.11.5",
+  "packages": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "matplotlib": "3.10.3",
+    "seaborn": "0.13.2",
+    "scikit-learn": "1.7.2",
+    "kagglehub": "0.4.3"
+  }
+}
