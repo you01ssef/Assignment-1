@@ -96,3 +96,11 @@ The core library versions are pinned in `requirements-analysis.txt`. The noteboo
 The notebook reports EDA, repeated feature profiles, missing cells, and class distribution; it compares class-weighted Logistic Regression and Random Forest in a stratified grouped split; and evaluates accuracy, phishing precision/recall/F1, ROC-AUC, FPR, FNR, confusion matrices, and permutation importance. Its rendered charts and metrics are in `reports/`. The project report interprets missed phishing as a user-harm path and false alarms as review/access costs. Results are from a static historical benchmark and do not certify a live site as safe.
 
 The optional Node server explicitly serves the added pages and project artifacts. Run `npm install && npm start` for the local site; `npm test` runs the repository’s existing server and browser-feature checks.
+
+## Assignment 7: DoS/DDoS and website availability
+
+[Read the study](https://you01ssef.github.io/Assignment-1/ddos-study.html). The existing coursework is preserved. The study analyzes the CICIDS2017 Friday DDoS CSV from the San0160 Hugging Face mirror, pinned to revision acc006479c77c0d1904fd5549a1b32658d9f7ab3. It contains six traffic-analysis answers, three charts, grouped held-out evaluation, availability implications, and limitations.
+
+With Python 3.12, install `ddos-requirements.txt` and run `python ddos-analysis.py`. It downloads the public CSV to ignored `data/ddos-friday.csv`. Outputs: `ddos-results.json`, `ddos-volume.png`, `ddos-distributions.png`, and `ddos-confusion.png`. The JSON records checksum, versions, split sizes, cleaning counts, metrics and summary statistics. The static study page presents these saved results; rerunning with changed inputs requires updating its prose/tables too.
+
+No attack traffic is generated. The movie component is omitted at the project owner's request.
