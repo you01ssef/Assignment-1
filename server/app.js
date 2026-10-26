@@ -301,6 +301,7 @@ export async function createApp({
     "cybersecurity",
     "input-security",
     "phishing-study",
+    "ddos-study",
     "threat-model",
     "architecture",
     "security-lab",
@@ -309,6 +310,9 @@ export async function createApp({
       page === "index" ? ["/", "/index.html"] : `/${page}.html`,
       (req, res) => res.sendFile(path.join(root, `${page}.html`)),
     );
+  for (const file of ["ddos-study.css", "ddos-analysis.py", "ddos-results.json", "ddos-requirements.txt", "ddos-volume.png", "ddos-distributions.png", "ddos-confusion.png"]) {
+    app.get(`/${file}`, (req, res) => res.sendFile(path.join(root, file)));
+  }
   app.use("/css", express.static(path.join(root, "css"), { dotfiles: "deny" }));
   app.use("/analysis", express.static(path.join(root, "analysis"), { dotfiles: "deny" }));
   app.use("/reports", express.static(path.join(root, "reports"), { dotfiles: "deny" }));
