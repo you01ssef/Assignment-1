@@ -31,16 +31,7 @@
         >
           Menu ☰
         </button>
-        <nav id="navigation" aria-label="Main navigation">
-          <a href="index.html">Home</a><a href="about.html">About</a
-          ><a href="tech-interests.html">Technology</a
-          ><a href="cybersecurity.html">Cybersecurity</a
-          ><a href="phishing-study.html">Research</a><a href="threat-model.html" aria-current="page">Threat model</a
-          ><a href="architecture.html">Architecture</a
-          ><a class="nav-lab" href="security-lab.html"
-            >Security lab <span aria-hidden="true">↗</span></a
-          >
-        </nav>
+        <nav id="navigation" aria-label="Main navigation"><a href="index.html">Home</a><a href="about.html">About</a><a href="tech-interests.html">Technology</a><a href="cybersecurity.html">Cybersecurity</a><a href="projects.html">Projects</a><a href="reports.html">Lab reports</a><a href="security-lab.html" class="nav-lab">Security lab</a></nav>
       </div>
     </header>
     <main id="main-content"><div class="page-header"><div class="eyebrow">THINK LIKE A DEFENDER</div><h1 class="page-title">Small demo.<br><em>Real questions.</em></h1><p class="page-subtitle">A simple STRIDE review of the live browser notebook.</p></div><section class="threat-grid"><article class="panel"><h2>Spoofing</h2><p>An attacker guesses a notebook passphrase. PBKDF2 slows guessing, but there is no server login or enforced rate limit.</p></article><article class="panel"><h2>Tampering</h2><p>AES-GCM detects changes to encrypted notes. Someone with browser access can still delete or replace stored data.</p></article><article class="panel"><h2>Repudiation</h2><p>The live demo has no audit trail. Git history tracks website changes, not notebook actions.</p></article><article class="panel"><h2>Information disclosure</h2><p>Notes are encrypted at rest. XSS, malicious extensions, or a compromised page can read notes while unlocked. Text-only rendering reduces injection risk.</p></article><article class="panel"><h2>Denial of service</h2><p>Limits of 50 notes, 1,000 characters per note, and capped chat history reduce browser load. Storage can still be cleared or exhausted.</p></article><article class="panel"><h2>Elevation of privilege</h2><p>Browser UI checks are not a security boundary. Real multi-user authorization requires the optional server backend.</p></article></section><div class="notice">The repository also contains the original Express/SQLite backend with server-side access checks. The live GitHub Pages notebook is a separate browser demonstration.</div></main>

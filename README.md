@@ -2,6 +2,12 @@
 
 **Open https://you01ssef.github.io/Assignment-1/ — no installation or local server needed.**
 
+## Projects and lab reports
+
+- [Projects](https://you01ssef.github.io/Assignment-1/projects.html) lists the three public repositories visible on November 5, 2026, with a link to the GitHub profile for the latest list.
+- [Lab reports](https://you01ssef.github.io/Assignment-1/reports.html) links to Lab 1, the phishing detection report, and the DDoS study.
+- [Lab 1 Identity and Security](https://you01ssef.github.io/Assignment-1/lab1-identity-security.html) is a browser report for IP configuration, ping, traceroute, and ARP. Fields save in that browser only and can be printed or saved as a PDF. The [Markdown report outline](reports/lab1-identity-security.md) is also in this repository. Observed values are intentionally blank until a student performs the lab.
+
 ## Phishing analysis notebook
 
 [Read the full notebook on the website](https://you01ssef.github.io/Assignment-1/analysis/phishing_analysis.html).
