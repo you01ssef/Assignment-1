@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lab 2: Name Resolution · Youssef</title><style>body{background:#f8f6f1;color:#172e43;font:17px/1.65 system-ui,sans-serif;margin:0}main{max-width:850px;margin:auto;padding:36px 22px}a{color:#087c80}h1{line-height:1.2}h2{font-size:1.25rem;margin-top:32px}section{border-top:1px solid #d7dedc;margin-top:24px}pre{background:#edf0ed;padding:16px;overflow:auto;border-radius:6px}.note{border-left:4px solid #087c80;padding:12px 16px;background:#edf3ef}footer{margin-top:36px}</style></head>
+<body><main><nav><a href="index.html">Home</a> · <a href="reports.html">Lab reports</a></nav><p>NETWORK CONFIGURATION AND CONNECTIVITY</p><h1>Lab 2.1: Name Resolution</h1><p>Lab A: localhost</p><p class="note"><strong>Simulated example:</strong> These system details and results are sample values. The tests were not performed.</p>
+<section><h2>1. System information</h2><p>Windows 11 Pro, version 24H2. Computer name: LAB-PC. Account: local administrator.</p></section>
+<section><h2>2. Open the command prompt</h2><p>On Windows, open Start and type <code>cmd</code>. On macOS, open Applications → Utilities → Terminal.</p></section>
+<section><h2>3. Network settings and loopback</h2><p>Use <code>ipconfig /all</code> on Windows or <code>ifconfig -a</code> on macOS.</p><pre>Sample network settings
+IPv4 address:    192.168.1.100
+Subnet mask:     255.255.255.0
+Default gateway: 192.168.1.1
+DNS server:      192.168.1.1
+DHCP enabled:    Yes</pre><p>Sample result for <code>ping 127.0.0.1</code>: four packets sent, four received, 0% loss, response times below 1 ms.</p><p>Sample result for <code>ping ::1</code>: four packets sent, four received, 0% loss, response times below 1 ms.</p><p>On macOS, use <code>ping6 ::1</code> for IPv6. Both addresses refer to the local computer. They test the same basic function using different IP versions. Successful loopback replies do not prove that the internet works.</p></section>
+<section><h2>4. Ping localhost</h2><p>Sample result: <code>ping localhost</code> resolved to <code>::1</code>, with four replies and 0% packet loss.</p><p>The operating system recognizes localhost through its name resolver, local configuration, and built-in handling. It can resolve to <code>127.0.0.1</code> or <code>::1</code>.</p></section>
+<section><h2>5. Examine the hosts file</h2><p>Windows: <code>C:\Windows\System32\drivers\etc\hosts</code><br>macOS: <code>/private/etc/hosts</code></p><pre>Sample Windows entries
+# localhost name resolution is handled within DNS itself.
+# 127.0.0.1 localhost
+# ::1 localhost</pre><p>Lines starting with # are comments. They provide instructions or inactive examples. In this example, Windows handles localhost internally. macOS commonly includes active localhost entries and <code>255.255.255.255 broadcasthost</code>.</p></section>
+<section><h2>6–7. Add names and save</h2><p>For the simulated computer, add these lines and save with administrator privileges:</p><pre>192.168.1.1 winserv
+192.168.1.100 me</pre><p>These entries map names to IP addresses on this computer only.</p></section>
+<section><h2>8. Ping me</h2><p>Sample result: <code>ping me</code> resolved to 192.168.1.100. Four packets sent, four received, 0% loss, and response times below 1 ms.</p></section>
+<section><h2>9. Ping winserv</h2><p>Sample result: <code>ping winserv</code> resolved to 192.168.1.1. Four packets sent, four received, 0% loss, and an average response time of 2 ms.</p><p>A real gateway may block ping. A timeout does not necessarily mean name resolution failed; check the address displayed.</p></section>
+<section><h2>10. Could the hosts file be exploited without administrator privileges?</h2><p>Normally, standard users cannot change it. Incorrect file permissions could let someone redirect a name to the wrong server. An attacker could also trick an administrator into editing the file.</p></section>
+<section><h2>11. Display the DNS cache</h2><p>On Windows, run <code>ipconfig /displaydns</code>. The cache stores name-resolution records to reduce repeated lookups.</p><pre>Sample cache excerpt after adding the hosts mappings
+me
+    Record Type:     1
+    Time To Live:    86400
+    Data Length:     4
+    Section:         Answer
+    A (Host) Record: 192.168.1.100
+
+winserv
+    Record Type:     1
+    Time To Live:    86400
+    Data Length:     4
+    Section:         Answer
+    A (Host) Record: 192.168.1.1</pre><p>Record type 1 means an IPv4 address record. These sample records come from the hosts file.</p><p>The older macOS procedure uses <code>sudo killall -INFO mDNSResponder</code>. The logging location and Console steps depend on the macOS version; /var/log/system.log is not reliable for every newer version.</p></section>
+<section><h2>Conclusion</h2><p>Loopback tests check local networking. The hosts file maps names to IP addresses locally, and the DNS cache temporarily stores name-resolution information.</p></section><footer><a href="reports.html">Back to lab reports</a></footer></main></body></html>
