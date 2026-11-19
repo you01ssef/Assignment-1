@@ -1,0 +1,179 @@
+LAB 3 — NETWORK TRANSPORT AND APPLICATIONS
+Youssef Rezkalla · TECH3498
+SIMULATED REPORT — NO EXPERIMENTS PERFORMED
+
+TECH3498 · LAB 3Network transportand applications.
+
+Following a packet from address discovery to encrypted file transfers—and exploring what email headers can tell us.
+
+SIMULATED LAB REPORT
+About these results: The numerical readings, packet details, mail responses, and account-review scenario below are simulated for learning. No Wireshark capture, obi2 login, email delivery, or account inspection was performed. They are not evidence of completing the hands-on lab.
+
+
+Network transportFile transfer & webEmail securityProblems & conclusionDownload report
+LAB 3.1 · NETWORK TRANSPORTDiscover, request, reply.
+
+Objective: Compare ARP, ICMP, UDP, and TCP using the handout’s ping, DNS lookup, and Telnet procedures. ICMP is an Internet-layer control protocol, rather than a transport protocol like TCP or UDP.
+
+
+Simulated environment and procedure
+
+Example client: 192.0.2.10, MAC 02:00:00:00:00:10. Example gateway/DNS resolver: 192.0.2.1, MAC 02:00:00:00:00:01. These are documentation IP addresses and invented locally administered MAC addresses.
+
+Inspect and clear the ARP cache with administrator privileges, then start Wireshark on the active network interface.
+
+Ping the default gateway four times. On macOS use ping -c 4 GATEWAY_IP; substitute the actual gateway.
+
+Stop the capture and examine ARP and ICMP. Start a new capture for nslookup kean.edu.
+
+Capture the assigned Telnet connection separately, if the university makes that service available. Select the TCP connection to port 23, rather than unrelated TCP traffic.
+
+
+Simulated ping summary—not measured
+
+Requests / replies | Loss | Reply times | 
+
+4 sent / 4 received | 0% | 1.2, 1.5, 1.1, 1.4 ms; average 1.3 ms | 
+
+
+ARP and Ethernet answers
+
+The expected sequence after clearing a gateway entry is an ARP broadcast request, a usually unicast ARP reply, then ICMP Echo Requests and Echo Replies. Background traffic may also appear.
+
+Broadcast destination: ff:ff:ff:ff:ff:ff.
+
+Ethernet field order: destination MAC first, source MAC second, then EtherType for an untagged Ethernet II frame. ARP uses 0x0806; IPv4 uses 0x0800. VLAN tags can add fields; the frame check sequence is often omitted by capture hardware.
+
+ARP fields: hardware type, protocol type, hardware address length, protocol address length, opcode, sender hardware address, sender protocol address, target hardware address, and target protocol address.
+
+Do all fields have data? They occupy space in the packet, but a request’s target hardware address is unknown and is commonly all zeroes. That is different from the Ethernet broadcast destination.
+
+
+Simulated request and reply
+
+Field | Request | Reply | 
+
+Opcode | 1 (request) | 2 (reply) | 
+
+Ethernet destination | ff:ff:ff:ff:ff:ff | 02:00:00:00:00:10 | 
+
+Sender IP / MAC | 192.0.2.10 / 02:00:00:00:00:10 | 192.0.2.1 / 02:00:00:00:00:01 | 
+
+Target IP / MAC | 192.0.2.1 / 00:00:00:00:00:00 | 192.0.2.10 / 02:00:00:00:00:10 | 
+
+
+For Ethernet/IPv4 ARP, hardware type is 1, protocol type is 0x0800, hardware length is 6, and protocol length is 4. The reply provides the gateway’s hardware address so the client can send its frame to that address. See RFC 826.
+
+
+Ping protocol: Wireshark lists ICMP for IPv4 ping; Echo Request is type 8/code 0 and Echo Reply is type 0/code 0. The display filter arp shows only ARP; icmp shows the IPv4 ping exchange.
+
+
+DNS over UDP and Telnet over TCP
+
+Illustrative field values only. Checksums are invented examples, not validated against packet bytes.
+
+Selected outgoing packet | Source port | Destination port | Checksum | 
+
+DNS query for kean.edu | 53014 | 53 (UDP) | 0x8b21 | 
+
+Telnet TCP SYN | 53015 | 23 (TCP) | 0x6c32 | 
+
+Reply ports reverse direction. Client ports and checksums vary between runs. DNS can also use TCP; this scenario uses ordinary UDP DNS. No real kean.edu address or Telnet service availability is asserted.
+
+
+Header comparison: UDP has an 8-byte header with source port, destination port, length, and checksum. TCP has a minimum 20-byte header and adds sequence and acknowledgment numbers, header length, control flags, a receive window, and an urgent pointer; options can extend it. TCP supports reliable, ordered delivery, retransmission, flow control, and congestion control. UDP does not supply those guarantees. See RFC 768 and RFC 9293.
+
+
+LAB 3.2 A · NETWORK APPLICATIONSFile transfers and the web.
+
+Prepared artifact: Download the simple webpage as index.html. This file is ready for the assigned upload, but has not been placed on obi2.
+
+Connect to obi2 with the university-provided SSH account. Change a default password yourself if required.
+
+Inspect the account directory with ls -al and view cat /etc/passwd.
+
+Create public_html in the account’s home directory. Apply the handout’s 0755 permissions to the account home directory, public_html, and the referenced public files.
+
+Use SFTP to upload index.html into public_html, then open the assigned https://obi2.kean.edu/~LOGIN_ID address.
+
+
+Meaning of /etc/passwd: Each colon-separated entry contains username, password marker, numeric user ID, numeric group ID, descriptive information, home directory, and login shell. An x commonly indicates a password hash stored separately in /etc/shadow. The file is an account directory, not a list of plaintext passwords. No real account listing is reproduced here.
+
+Permissions: 0755 means the owner may read, write, and execute; group and others may read and execute. On directories, execute permits traversal. The handout also requests 0755 for referenced files; static HTML commonly needs only 0644 when server policy allows it.
+
+
+Simulated packet observations
+
+No FTP packets appear in this scenario because the procedure uses SFTP over SSH, not plain FTP. Other expected traffic can include DNS, ICMP, TLS, and UDP, in addition to ARP and TCP. SSH encrypts the transferred content after key exchange, so Wireshark does not expose the uploaded HTML as readable application payload. See RFC 4253.
+
+Simulated outgoing packets; checksum is an unvalidated illustrative value
+
+Traffic | Client source port | Server destination port | Observation | 
+
+SSH / SFTP | 53016 | 22 (TCP) | SSH session, encrypted file transfer | 
+
+HTTPS page visit | 53017 | 443 (TCP) | Example TCP checksum: 0xa41d | 
+
+Does HTTP appear? For this HTTPS-over-TCP scenario, an undecrypted capture typically shows TLS rather than readable HTTP requests. Plain HTTP normally uses TCP port 80. HTTP/3 instead uses QUIC over UDP, usually port 443. The page URL and browser protocol determine which traffic is actually seen.
+
+
+LAB 3.2 B · EMAIL PROTOCOLSA sender name is not proof.
+
+The handout asks for two messages to your own mailbox from obi2: one with the normal sender, then one with its specified alternate sender. No messages were sent for this report.
+
+Prepared three-line message
+
+Hello,
+This message is part of Lab 3 on network applications.
+I am comparing email headers and sender authentication.
+
+Simulated server response: “Message accepted for delivery” is an illustrative success response, not output from obi2. Some mail clients simply return to the shell with no confirmation; submission does not prove inbox delivery. The local mail command and period/EOF behavior vary by implementation.
+
+Possible exploitation: A misleading From address can impersonate a trusted sender in phishing or social-engineering messages. A mail system may reject or rewrite the alternate sender instead of accepting it.
+
+Invented comparison—not delivered messages
+
+Header | Normal example | Alternate-sender example | 
+
+From | student@example.edu | spoofing@example.edu | 
+
+Subject | Test message from Youssef | Test message from Youssef | 
+
+Return-Path | Depends on envelope sender | May change, be rewritten, or be rejected | 
+
+Received / authentication | Inspect trusted receiver-added fields | Compare route and authentication outcomes | 
+
+Can the true sender be found? Trusted Received headers can help trace servers, and Authentication-Results can show SPF, DKIM, and DMARC outcomes. These checks help establish domain authorization and message integrity; they do not conclusively identify a human. Lower, attacker-supplied headers may be forged. Server logs and authorized investigation may be needed.
+
+Protocol roles: SMTP sends mail between servers, commonly over TCP 25. POP3 retrieves messages, conventionally on TCP 110; IMAP synchronizes mailbox access, conventionally on TCP 143. TLS-enabled alternatives commonly use 995 and 993. This handout does not actually include a POP3 packet-capture exercise. An SSH client capture of a remote mail command shows SSH, not necessarily the remote server’s SMTP exchange.
+
+
+Simulated account-security review
+
+Illustrative scenario: One current session and one older signed-in device are listed. The older session would be signed out if no longer needed. One unused third-party application is listed; its access would be reviewed and removed if unnecessary. These are hypothetical findings—no Gmail or Kean account was inspected, and no sessions or permissions were changed. Actual account providers and menu names may differ.
+
+
+DISCUSSIONProblems, fixes, and takeaway.
+
+Actual limitation: No packet capture or authenticated university session was available for this report. The response was to prepare the explanations, webpage artifact, and explicitly simulated observations. The hands-on work remains unverified.
+
+ARP request missing: An entry may be cached, the wrong interface may be selected, or the traffic may use IPv6 neighbor discovery. Verify the interface, address family, and cache state before repeating the authorized test.
+
+Telnet unavailable: Service restrictions or off-campus access may prevent connection. Record the actual error and ask the instructor about an approved alternative; an SSH connection is not proof of a Telnet capture.
+
+Checksum flagged: Outgoing checksum offloading can make a local capture appear to contain an incomplete checksum. Do not immediately interpret that as packet corruption.
+
+Webpage not loading: Check the exact public_html path, lowercase index.html name, case-sensitive links, and the assigned permissions.
+
+No FTP or HTTP label: SFTP and HTTPS encrypt application content. Filter the relevant connection and inspect SSH/TLS rather than expecting plaintext.
+
+Email behavior differs: The server may reject sender overrides or the mail command may use different syntax. Record actual output rather than assuming successful delivery.
+
+Conclusion: ARP resolves a local IPv4 neighbor’s link-layer address; ICMP supports reachability diagnostics; UDP minimizes transport overhead; TCP supplies a reliable byte stream. SSH and TLS protect application traffic, while email sender fields must be assessed alongside authentication and trusted routing evidence.
+
+To complete the real lab: Replace these simulations with your capture observations, document actual errors and fixes, verify your obi2 webpage, compare your two received messages, and perform your own account-security review. Restore any temporary lab configuration.
+
+
+
+References: RFC 826, RFC 768, RFC 9293, RFC 4253 (rfc-editor.org).
+Source assignment: Lab 3 Network Transport and Applications.docx.
